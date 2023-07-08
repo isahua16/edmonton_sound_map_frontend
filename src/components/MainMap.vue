@@ -1,7 +1,5 @@
 <template>
-  <v-main>
-    <div id="map"></div>
-  </v-main>
+  <div id="map"></div>
 </template>
 
 <script>
@@ -44,7 +42,7 @@ export default {
 
 <style scoped>
 #map {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 91.55vh;
 }
 </style>
