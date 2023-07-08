@@ -12,6 +12,7 @@
 import MainMap from "@/components/MainMap.vue";
 import AppBar from "@/components/AppBar.vue";
 import AppNav from "@/components/AppNav.vue";
+
 export default {
   components: {
     MainMap,
