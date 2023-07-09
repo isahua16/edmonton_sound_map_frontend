@@ -1,12 +1,26 @@
 <template>
-  <div></div>
+  <div>
+    <map-marker
+      v-for="(feature, i) in features"
+      :key="i"
+      :map="map"
+      :feature="feature"
+    ></map-marker>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import MapMarker from "@/components/MapMarker.vue";
 export default {
+  data() {
+    return {
+      features: [],
+    };
+  },
+  components: {
+    MapMarker,
+  },
   props: {
     map: {
       type: Object,
@@ -16,22 +30,12 @@ export default {
     this.get_features();
   },
   methods: {
-    create_markers: function (features, map) {
-      for (let i = 0; i < features.length; i++) {
-        let coordinates = L.latLng([
-          Number(features[i].lat),
-          Number(features[i].long),
-        ]);
-        L.marker(coordinates).addTo(map);
-      }
-    },
     get_features: function () {
       axios
         .request({ url: `${process.env.VUE_APP_BASE_DOMAIN}/api/features` })
         .then((res) => {
           console.log(res);
-          let features = res.data;
-          this.create_markers(features, this.map);
+          this.features = res.data;
         })
         .catch((err) => {
           console.log(err);
