@@ -4,7 +4,7 @@
 
 <script>
 import axios from "axios";
-
+import L from "leaflet";
 export default {
   data() {
     return {
@@ -25,10 +25,10 @@ export default {
           console.log(res);
           let src = URL.createObjectURL(res["data"]);
           document
-            .querySelector(`.popup_container`)
+            .querySelector(`.popup`)
             .insertAdjacentHTML(
               `afterbegin`,
-              `<img width="200px" src="${src}">`
+              `<img class="popup_image" src="${src}">`
             );
         })
         .catch((err) => {
@@ -37,9 +37,19 @@ export default {
     },
     get_feature_audio: function () {
       axios
-        .request({ url: "" })
+        .request({
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/feature/audio`,
+          params: {
+            feature_id: this.feature.feature_id,
+          },
+          responseType: "blob",
+        })
         .then((res) => {
           console.log(res);
+          let src = URL.createObjectURL(res["data"]);
+          document
+            .querySelector(`.popup`)
+            .insertAdjacentHTML(`beforeend`, `<audio controls src="${src}">`);
         })
         .catch((err) => {
           console.log(err);
@@ -47,10 +57,14 @@ export default {
     },
   },
   mounted() {
-    this.popup = this.marker.bindPopup(
-      `<div class='popup_container'><p>${this.feature.location}</p></div>`
-    );
+    this.popup = L.popup({
+      autoClose: false,
+      minWidth: 300,
+      className: "popup",
+    });
+    this.marker.bindPopup(this.popup);
     this.marker.on("popupopen", this.get_feature_image);
+    this.marker.on("popupopen", this.get_feature_audio);
   },
   props: {
     marker: {
@@ -63,5 +77,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.popup {
+  width: 300px;
+  height: 500px;
+  display: grid;
+  justify-items: center;
+}
+
+.popup_image {
+  width: 100%;
+}
 </style>
