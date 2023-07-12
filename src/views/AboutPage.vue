@@ -1,14 +1,14 @@
 <template>
   <v-main>
-    <main-map></main-map>
+    <about-component></about-component>
   </v-main>
 </template>
 
 <script>
-import MainMap from "@/components/MainMap.vue";
+import AboutComponent from "@/components/AboutComponent.vue";
 export default {
   components: {
-    MainMap,
+    AboutComponent,
   },
 };
 </script>

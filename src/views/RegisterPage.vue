@@ -1,14 +1,14 @@
 <template>
   <v-main>
-    <main-map></main-map>
+    <register-form></register-form>
   </v-main>
 </template>
 
 <script>
-import MainMap from "@/components/MainMap.vue";
+import RegisterForm from "@/components/RegisterForm.vue";
 export default {
   components: {
-    MainMap,
+    RegisterForm,
   },
 };
 </script>
