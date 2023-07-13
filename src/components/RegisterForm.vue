@@ -1,30 +1,78 @@
 <template>
   <v-main>
     <v-container>
+      <h2>Register</h2>
       <v-text-field
-        :elevation="hover ? 24 : 6"
-        label="email"
+        v-model="email_input"
+        label="Email"
         type="text"
-        ref="input_username"
       ></v-text-field>
       <v-text-field
-        :elevation="hover ? 24 : 6"
-        label="username"
+        v-model="username_input"
+        label="Username"
         type="text"
-        ref="input_username"
       ></v-text-field>
       <v-text-field
-        :elevation="hover ? 24 : 6"
-        label="password"
+        v-model="password_input"
+        label="Password"
         type="password"
-        ref="input_password"
       ></v-text-field>
-      <v-btn depressed color="primary"> Submit </v-btn>
+      <v-btn @click="signup_click" color="primary"> Submit </v-btn>
+      <v-alert
+        :value="alert"
+        color="red"
+        icon="mdi-cancel"
+        transition="scale-transition"
+      >
+        {{ message }}
+      </v-alert>
     </v-container>
   </v-main>
 </template>
 <script>
-export default {};
+import axios from "axios";
+export default {
+  methods: {
+    signup_click: function () {
+      this.alert = false;
+      this.message = undefined;
+      if (
+        this.email_input != undefined &&
+        this.username_input != undefined &&
+        this.password_input != undefined
+      ) {
+        axios
+          .request({
+            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user`,
+            method: `POST`,
+            data: {
+              email: this.email_input,
+              username: this.username_input,
+              password: this.password_input,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        this.message = "All fields must be filled";
+        this.alert = true;
+      }
+    },
+  },
+  data() {
+    return {
+      alert: false,
+      message: undefined,
+      email_input: undefined,
+      username_input: undefined,
+      password_input: undefined,
+    };
+  },
+};
 </script>
 
 <style scoped>
