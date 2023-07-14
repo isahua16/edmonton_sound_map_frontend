@@ -4,6 +4,7 @@ import HomePage from "@/views/HomePage.vue";
 import RegisterPage from "@/views/RegisterPage.vue";
 import ConnectPage from "@/views/ConnectPage.vue";
 import AboutPage from "@/views/AboutPage.vue";
+import UploadPage from "@/views/UploadPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
   {
     path: `/about`,
     component: AboutPage,
+  },
+  {
+    path: `/upload`,
+    component: UploadPage,
   },
 ];
 

@@ -29,6 +29,7 @@
 </template>
 <script>
 import axios from "axios";
+import Cookies from "vue-cookies";
 export default {
   methods: {
     signup_click: function () {
@@ -50,7 +51,7 @@ export default {
             },
           })
           .then((res) => {
-            console.log(res);
+            Cookies.set("token", res[`data`][0][`token`]);
           })
           .catch((err) => {
             console.log(err);
