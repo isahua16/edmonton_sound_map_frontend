@@ -16,7 +16,7 @@
       label="Password"
       type="password"
     ></v-text-field>
-    <v-btn class="mb-5" @click="signup_click" color="primary"> Submit </v-btn>
+    <v-btn class="my-5" @click="signup_click" color="primary"> Submit </v-btn>
     <v-alert
       :value="alert"
       color="red"

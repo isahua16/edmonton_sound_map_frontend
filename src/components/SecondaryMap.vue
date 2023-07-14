@@ -19,6 +19,7 @@ export default {
         this.marker.remove();
       }
       this.marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
+      this.$root.$emit("click_latlng", e.latlng.lat, e.latlng.lng);
     },
     setup_map: function () {
       let corner1 = L.latLng(53.88167850008248, -112.59475708007814);
