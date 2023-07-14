@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar height="72" app class="d-flex justify-center">
+  <v-app-bar app height="72" class="d-flex justify-center">
     <v-toolbar-title>
       <h3 class="text-center">EDMONTON SOUND MAP</h3>
     </v-toolbar-title>
