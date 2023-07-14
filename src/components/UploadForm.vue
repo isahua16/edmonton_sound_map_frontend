@@ -2,7 +2,13 @@
   <v-container>
     <h2 class="mt-5 mb-5">Submission</h2>
     <secondary-map class="mb-5"></secondary-map>
-    <v-text-field disabled v-model="name" label="Name"></v-text-field>
+    <v-text-field v-model="name" label="Name"></v-text-field>
+    <v-text-field
+      disabled
+      v-model="location"
+      :value="location"
+      label="Location"
+    ></v-text-field>
     <v-textarea
       v-model="description"
       auto-grow
@@ -39,9 +45,10 @@
 import SecondaryMap from "@/components/SecondaryMap.vue";
 export default {
   methods: {
-    get_latlng: function (lat, long) {
+    get_latlng: function (lat, long, location) {
       this.lat = lat;
       this.long = long;
+      this.location = location;
     },
   },
   data() {

@@ -5,12 +5,15 @@
 <script>
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "leaflet-control-geocoder";
 export default {
   data() {
     return {
       center: [53.5462055, -113.491241],
-      map: {},
+      map: undefined,
       marker: undefined,
+      geocoder: undefined,
+      location: undefined,
     };
   },
   methods: {
@@ -19,7 +22,15 @@ export default {
         this.marker.remove();
       }
       this.marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
-      this.$root.$emit("click_latlng", e.latlng.lat, e.latlng.lng);
+      this.geocoder.options.geocoder.reverse(e.latlng, 18, (results) => {
+        this.location = results[0][`name`];
+      });
+      this.$root.$emit(
+        "click_latlng",
+        e.latlng.lat,
+        e.latlng.lng,
+        this.location
+      );
     },
     setup_map: function () {
       let corner1 = L.latLng(53.88167850008248, -112.59475708007814);
@@ -40,6 +51,8 @@ export default {
             "8nDStn933xTbhSC1BHugLOD5N40As4Lkm1HFlYv22SBm6jAlIZReTwdLZiLHjnlu",
         }
       ).addTo(this.map);
+
+      this.geocoder = L.Control.geocoder();
     },
   },
   mounted() {
