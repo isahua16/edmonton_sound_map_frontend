@@ -29,6 +29,7 @@
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-bottom-navigation>
+
     <v-bottom-navigation app v-else height="72" :value="value">
       <router-link class="non_mobile" to="/"
         ><v-btn value="/" class="pa-10">
@@ -64,6 +65,7 @@
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-bottom-navigation>
+
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list v-if="!token">
         <router-link to="/">
@@ -107,6 +109,7 @@
           </v-list-item>
         </router-link>
       </v-list>
+
       <v-list v-else>
         <router-link to="/">
           <v-list-item>
