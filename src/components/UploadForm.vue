@@ -15,20 +15,65 @@
       <v-select v-model="time" label="Time of Day" :items="times"></v-select>
     </v-container>
     <v-container class="categories">
-      <v-checkbox dense label="Interior" v-model="is_interior"></v-checkbox>
-      <v-checkbox dense label="Natural" v-model="is_natural"></v-checkbox>
-      <v-checkbox dense label="Societal" v-model="is_societal"></v-checkbox>
-      <v-checkbox dense label="Mechanical" v-model="is_mechanical"></v-checkbox>
+      <v-checkbox
+        dense
+        :false-value="0"
+        :true-value="1"
+        label="Interior"
+        v-model="is_interior"
+      ></v-checkbox>
+      <v-checkbox
+        :false-value="0"
+        :true-value="1"
+        dense
+        label="Natural"
+        v-model="is_natural"
+      ></v-checkbox>
+      <v-checkbox
+        :false-value="0"
+        :true-value="1"
+        dense
+        label="Societal"
+        v-model="is_societal"
+      ></v-checkbox>
+      <v-checkbox
+        :false-value="0"
+        :true-value="1"
+        dense
+        label="Mechanical"
+        v-model="is_mechanical"
+      ></v-checkbox>
     </v-container>
     <v-container class="files">
-      <v-file-input label="Image"></v-file-input>
-      <v-file-input label="Audio"></v-file-input>
+      <v-file-input
+        hint="500kB or less"
+        persistent-hint
+        v-model="image"
+        show-size
+        prepend-icon="mdi-image"
+        label="Image"
+      ></v-file-input>
+      <v-file-input
+        hint="50MB or less"
+        persistent-hint
+        v-model="audio"
+        show-size
+        prepend-icon="mdi-volume-high"
+        label="Audio"
+      ></v-file-input>
     </v-container>
-    <v-btn class="my-5" color="primary">Submit</v-btn>
+    <v-btn
+      :loading="loading"
+      :disabled="loading"
+      @click="post_feature"
+      class="my-5"
+      color="primary"
+      >Submit</v-btn
+    >
     <v-alert
       :value="alert"
-      color="red"
-      icon="mdi-alert-circle"
+      :color="color"
+      :icon="icon"
       transition="scale-transition"
     >
       {{ message }}
@@ -38,8 +83,84 @@
 
 <script>
 import SecondaryMap from "@/components/SecondaryMap.vue";
+import Cookies from "vue-cookies";
+import axios from "axios";
 export default {
   methods: {
+    post_feature: function () {
+      this.loading = true;
+      this.alert = false;
+      this.message = undefined;
+      if (
+        this.lat &&
+        this.long &&
+        this.name &&
+        this.location &&
+        this.description &&
+        this.season &&
+        this.audio &&
+        this.time &&
+        Cookies.get("token")
+      ) {
+        let form = new FormData();
+        form.append("lat", this.lat);
+        form.append("long", this.long);
+        form.append("location", this.location);
+        form.append("name", this.name);
+        form.append("description", this.description);
+        form.append("is_interior", this.is_interior);
+        form.append("is_mechanical", this.is_mechanical);
+        form.append("is_natural", this.is_natural);
+        form.append("is_societal", this.is_societal);
+        form.append("season", this.season);
+        form.append("time", this.time);
+        form.append("token", Cookies.get("token"));
+        form.append("audio", this.audio);
+        if (this.image != undefined) {
+          form.append("image", this.image);
+        }
+        axios
+          .request({
+            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/feature`,
+            method: `POST`,
+            data: form,
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then(() => {
+            this.loading = false;
+            this.alert = true;
+            this.color = "green";
+            this.icon = "mdi-check-circle";
+            this.message = "Upload succesful. Awaiting admin approval";
+            this.lat = undefined;
+            this.long = undefined;
+            this.name = undefined;
+            this.location = undefined;
+            this.description = undefined;
+            this.season = undefined;
+            this.time = undefined;
+            this.is_interior = 0;
+            this.is_mechanical = 0;
+            this.is_natural = 0;
+            this.is_societal = 0;
+            this.audio = null;
+            this.image = null;
+          })
+          .catch(() => {
+            this.loading = false;
+            this.alert = true;
+            this.color = "red";
+            this.icon = "mdi-alert-circle";
+            this.message = "Upload failed";
+          });
+      } else {
+        this.loading = false;
+        this.alert = true;
+        this.color = "red";
+        this.icon = "mdi-alert-circle";
+        this.message = "Missing information";
+      }
+    },
     get_latlng: function (lat, long, location) {
       this.lat = lat;
       this.long = long;
@@ -48,21 +169,26 @@ export default {
   },
   data() {
     return {
+      audio: null,
+      image: null,
       lat: undefined,
       long: undefined,
       location: undefined,
       description: undefined,
       name: undefined,
-      is_interior: false,
-      is_mechanical: false,
-      is_natural: false,
-      is_societal: false,
+      is_interior: 0,
+      is_mechanical: 0,
+      is_natural: 0,
+      is_societal: 0,
       season: undefined,
       time: undefined,
-      seasons: ["Summer", "Fall", "Winter", "Spring"],
-      times: ["Day", "Night"],
+      seasons: ["summer", "fall", "winter", "spring"],
+      times: ["day", "night"],
       alert: false,
       message: undefined,
+      color: "red",
+      icon: "mdi-alert-circle",
+      loading: false,
     };
   },
   components: {
