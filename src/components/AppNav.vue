@@ -19,12 +19,6 @@
           <v-icon>mdi-login</v-icon>
         </v-btn>
       </router-link>
-      <router-link class="non_mobile" to="/about">
-        <v-btn value="/about" class="pa-10">
-          <span>About</span>
-          <v-icon>mdi-information</v-icon>
-        </v-btn>
-      </router-link>
       <v-btn class="on_mobile pa-10" @click="drawer = !drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -55,7 +49,12 @@
           <v-icon>mdi-account-circle</v-icon>
         </v-btn>
       </router-link>
-
+      <router-link v-if="is_admin" class="non_mobile" to="/admin">
+        <v-btn value="/admin" class="pa-10">
+          <span>Admin</span>
+          <v-icon>mdi-lock</v-icon>
+        </v-btn>
+      </router-link>
       <div class="non_mobile">
         <v-btn @click="logout" value="/logout" class="pa-10">
           <span>Logout</span>
@@ -173,6 +172,7 @@ export default {
   mounted() {
     this.$root.$on("token_update", () => {
       this.token = Cookies.get("token");
+      this.is_admin = Cookies.get("is_admin");
     });
   },
   methods: {

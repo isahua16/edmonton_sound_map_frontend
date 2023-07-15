@@ -3,8 +3,8 @@ import VueRouter from "vue-router";
 import HomePage from "@/views/HomePage.vue";
 import RegisterPage from "@/views/RegisterPage.vue";
 import ConnectPage from "@/views/ConnectPage.vue";
-import AboutPage from "@/views/AboutPage.vue";
 import UploadPage from "@/views/UploadPage.vue";
+import AdminPage from "@/views/AdminPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -21,12 +21,12 @@ const routes = [
     component: ConnectPage,
   },
   {
-    path: `/about`,
-    component: AboutPage,
-  },
-  {
     path: `/upload`,
     component: UploadPage,
+  },
+  {
+    path: `/admin`,
+    component: AdminPage,
   },
 ];
 
