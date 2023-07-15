@@ -29,6 +29,14 @@ export default {
     };
   },
   methods: {
+    delete_feature: function (feature_id) {
+      let filtered_features = this.features.filter((feature) => {
+        if (feature.feature_id !== feature_id) {
+          return feature;
+        }
+      });
+      this.features = filtered_features;
+    },
     get_all_users: function () {},
     get_all_features: function () {
       if (this.feature == null) {
@@ -40,12 +48,9 @@ export default {
             },
           })
           .then((res) => {
-            console.log(res);
             this.features = res[`data`];
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch();
       }
     },
   },
@@ -58,6 +63,7 @@ export default {
       this.$router.path(`/`);
     }
     this.get_all_features();
+    this.$root.$on("feature_delete", this.delete_feature);
   },
 };
 </script>

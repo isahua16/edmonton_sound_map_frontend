@@ -3,7 +3,7 @@
     <v-expansion-panel-header disable-icon-rotate @click="get_feature_media"
       ><h2>{{ feature.name }}</h2>
       <template v-if="is_approved == 0" v-slot:actions>
-        <v-icon color="error"> mdi-alert-circle </v-icon>
+        <v-icon color="warning"> mdi-alert-circle </v-icon>
       </template>
       <template v-else v-slot:actions>
         <v-icon color="success"> mdi-check-circle </v-icon>
@@ -33,11 +33,6 @@ import Cookies from "vue-cookies";
 import axios from "axios";
 import ApproveFeature from "@/components/ApproveFeature.vue";
 export default {
-  mounted() {
-    this.$on("status_changed", () => {
-      console.log(`hello`);
-    });
-  },
   components: {
     ApproveFeature,
   },
@@ -45,13 +40,12 @@ export default {
     return {
       image: null,
       audio: null,
-      is_approved: this.feature.is_approved,
+      is_approved: !!this.feature.is_approved,
     };
   },
   methods: {
-    new_approval: function (number) {
-      console.log(`hello`);
-      this.is_approved = number;
+    new_approval: function (bool) {
+      this.is_approved = bool;
     },
     get_feature_image: function () {
       axios
@@ -66,9 +60,7 @@ export default {
         .then((res) => {
           this.image = URL.createObjectURL(res["data"]);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     },
     get_feature_audio: function () {
       axios
@@ -83,9 +75,7 @@ export default {
         .then((res) => {
           this.audio = URL.createObjectURL(res["data"]);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     },
     get_feature_media: function () {
       if (this.image == null && this.audio == null) {

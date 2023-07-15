@@ -82,9 +82,7 @@ export default {
             <audio controls controlsList="nodownload" src="${src}">`
           );
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch();
     },
   },
   mounted() {

@@ -34,12 +34,9 @@ export default {
       axios
         .request({ url: `${process.env.VUE_APP_BASE_DOMAIN}/api/features` })
         .then((res) => {
-          console.log(res);
           this.features = res.data;
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     },
   },
 };

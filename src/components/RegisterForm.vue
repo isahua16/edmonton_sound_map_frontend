@@ -60,8 +60,7 @@ export default {
               this.$router.push(`/`);
             }
           })
-          .catch((err) => {
-            console.log(err);
+          .catch(() => {
             this.message = "Something went wrong";
             this.alert = true;
           });
