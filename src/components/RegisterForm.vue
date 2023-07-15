@@ -52,9 +52,16 @@ export default {
           })
           .then((res) => {
             Cookies.set("token", res[`data`][0][`token`]);
+            if (res[`data`][0][`is_admin`] == 1) {
+              Cookies.set("is_admin", true);
+            }
+            this.$root.$emit("token_update");
+            this.$router.push(`/profile`);
           })
           .catch((err) => {
             console.log(err);
+            this.message = "Something went wrong";
+            this.alert = true;
           });
       } else {
         this.message = "All fields are required";

@@ -1,7 +1,6 @@
 <template>
   <div></div>
 </template>
-
 <script>
 import axios from "axios";
 import L from "leaflet";
@@ -137,14 +136,13 @@ export default {
   text-align: center;
 }
 .leaflet-popup-content {
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
   display: grid;
   align-items: center;
   min-width: 300px;
   gap: 10px;
 }
-
 .popup_image {
   width: 100%;
 }

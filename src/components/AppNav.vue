@@ -55,12 +55,13 @@
           <v-icon>mdi-account-circle</v-icon>
         </v-btn>
       </router-link>
-      <router-link class="non_mobile" to="/logout">
-        <v-btn value="/logout" class="pa-10">
+      <div class="non-mobile">
+        <v-btn @click="logout" value="/logout" class="pa-10">
           <span>Logout</span>
           <v-icon>mdi-logout</v-icon>
         </v-btn>
-      </router-link>
+      </div>
+
       <v-btn class="on_mobile pa-10" @click="drawer = !drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -151,16 +152,14 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="/logout">
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-logout</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Logout</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </router-link>
+        <v-list-item @click="logout" class="logout_button">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -168,18 +167,50 @@
 
 <script>
 import Cookies from "vue-cookies";
+import axios from "axios";
 export default {
+  mounted() {
+    this.$root.$on("token_update", () => {
+      this.token = Cookies.get("token");
+    });
+  },
+  methods: {
+    logout: function () {
+      axios
+        .request({
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/login`,
+          method: `DELETE`,
+          data: {
+            token: Cookies.get("token"),
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      Cookies.remove("token");
+      Cookies.remove("is_admin");
+      this.$router.push(`/`);
+      this.$root.$emit("token_update");
+    },
+  },
   data() {
     return {
       value: this.$route.path,
       token: Cookies.get("token"),
       drawer: false,
+      is_admin: Cookies.get("is_admin"),
     };
   },
 };
 </script>
 
 <style scoped>
+.logout_button {
+  cursor: pointer;
+}
 a {
   text-decoration: none;
 }
