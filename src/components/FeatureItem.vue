@@ -10,20 +10,22 @@
       </template>
     </v-expansion-panel-header>
     <v-expansion-panel-content>
-      <h3>{{ feature.name }}</h3>
-      <p>{{ feature.description }}</p>
-      <img width="200px " :src="image" />
-      <audio
-        style="display: block; width: 300px; margin-top: 10px"
-        controls
-        controlsList="nodownload"
-        :src="audio"
-      ></audio>
-      <approve-feature
-        @status_changed="new_approval"
-        :status="is_approved"
-        :feature_id="feature.feature_id"
-      ></approve-feature>
+      <v-container>
+        <h3>{{ feature.name }}</h3>
+        <p>{{ feature.description }}</p>
+        <img width="300px " :src="image" />
+        <audio
+          style="display: block; width: 300px; margin-top: 10px"
+          controls
+          controlsList="nodownload"
+          :src="audio"
+        ></audio>
+        <approve-feature
+          @status_changed="new_approval"
+          :status="is_approved"
+          :feature_id="feature.feature_id"
+        ></approve-feature>
+      </v-container>
     </v-expansion-panel-content>
   </v-expansion-panel>
 </template>
