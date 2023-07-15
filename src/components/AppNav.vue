@@ -55,7 +55,8 @@
           <v-icon>mdi-account-circle</v-icon>
         </v-btn>
       </router-link>
-      <div class="non-mobile">
+
+      <div class="non_mobile">
         <v-btn @click="logout" value="/logout" class="pa-10">
           <span>Logout</span>
           <v-icon>mdi-logout</v-icon>
@@ -192,7 +193,9 @@ export default {
         });
       Cookies.remove("token");
       Cookies.remove("is_admin");
-      this.$router.push(`/`);
+      if (this.$route.path !== `/`) {
+        this.$router.push(`/`);
+      }
       this.$root.$emit("token_update");
     },
   },

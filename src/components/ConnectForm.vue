@@ -48,7 +48,9 @@ export default {
               Cookies.set("is_admin", true);
             }
             this.$root.$emit("token_update");
-            this.$router.push(`/profile`);
+            if (this.$route.path !== `/`) {
+              this.$router.push(`/`);
+            }
           })
           .catch((err) => {
             console.log(err);
