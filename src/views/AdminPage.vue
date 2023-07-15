@@ -31,7 +31,7 @@ export default {
   methods: {
     get_all_users: function () {},
     get_all_features: function () {
-      if (this.features == null) {
+      if (this.feature == null) {
         axios
           .request({
             url: `${process.env.VUE_APP_BASE_DOMAIN}/api/admin/features`,

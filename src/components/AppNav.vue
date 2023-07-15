@@ -152,6 +152,16 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
+        <router-link v-if="is_admin" to="/admin">
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-lock</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Admin</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
         <v-list-item @click="logout" class="logout_button">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
