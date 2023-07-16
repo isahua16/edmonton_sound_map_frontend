@@ -5,6 +5,7 @@ import RegisterPage from "@/views/RegisterPage.vue";
 import ConnectPage from "@/views/ConnectPage.vue";
 import UploadPage from "@/views/UploadPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
+import ProfilePage from "@/views/ProfilePage.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -27,6 +28,10 @@ const routes = [
   {
     path: `/admin`,
     component: AdminPage,
+  },
+  {
+    path: `/profile`,
+    component: ProfilePage,
   },
 ];
 
