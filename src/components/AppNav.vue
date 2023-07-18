@@ -7,6 +7,12 @@
           <v-icon>mdi-home</v-icon>
         </v-btn></router-link
       >
+      <router-link class="non_mobile" to="/about">
+        <v-btn value="/about" class="pa-10">
+          <span>About</span>
+          <v-icon>mdi-information</v-icon>
+        </v-btn>
+      </router-link>
       <router-link class="non_mobile" to="/signup"
         ><v-btn value="/signup" class="pa-10">
           <span>Sign Up</span>
@@ -19,6 +25,7 @@
           <v-icon>mdi-login</v-icon>
         </v-btn>
       </router-link>
+
       <v-btn class="on_mobile pa-10" @click="drawer = !drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -79,6 +86,16 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
+        <router-link to="/about">
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-information</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>About</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
         <router-link to="/signup">
           <v-list-item>
             <v-list-item-icon>
@@ -99,12 +116,6 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <v-btn>
-          <v-icon> mdi-filter-menu </v-icon>
-        </v-btn>
-        <v-btn>
-          <v-icon> mdi-dice-multiple </v-icon>
-        </v-btn>
       </v-list>
 
       <v-list v-else>
