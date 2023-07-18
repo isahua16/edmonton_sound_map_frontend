@@ -67,7 +67,7 @@
       </v-btn>
     </v-bottom-navigation>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list v-if="!token">
         <router-link to="/">
           <v-list-item>
