@@ -1,6 +1,6 @@
 <template>
   <div id="map">
-    <map-markers :map="map"></map-markers>
+    <map-markers :map="map"> </map-markers>
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
     return {
       center: [53.5462055, -113.491241],
       map: {},
+      play_icon: "mdi-play",
     };
   },
   methods: {
@@ -51,5 +52,15 @@ export default {
   width: 100%;
   min-height: calc(100vh - 144px);
   z-index: 0;
+}
+.floating_filter {
+  z-index: 500;
+  top: 80px;
+  right: 10px;
+}
+.floating_play {
+  z-index: 500;
+  bottom: 80px;
+  right: 10px;
 }
 </style>

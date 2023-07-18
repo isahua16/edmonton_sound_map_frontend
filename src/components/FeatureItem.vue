@@ -20,11 +20,11 @@
           controlsList="nodownload"
           :src="audio"
         ></audio>
-        <approve-feature
+        <edit-feature
           @status_changed="new_approval"
           :status="is_approved"
           :feature_id="feature.feature_id"
-        ></approve-feature>
+        ></edit-feature>
       </v-container>
     </v-expansion-panel-content>
   </v-expansion-panel>
@@ -33,10 +33,10 @@
 <script>
 import Cookies from "vue-cookies";
 import axios from "axios";
-import ApproveFeature from "@/components/ApproveFeature.vue";
+import EditFeature from "@/components/EditFeature.vue";
 export default {
   components: {
-    ApproveFeature,
+    EditFeature,
   },
   data() {
     return {

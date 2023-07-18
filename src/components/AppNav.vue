@@ -99,16 +99,12 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="/about">
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-information</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>About</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </router-link>
+        <v-btn>
+          <v-icon> mdi-filter-menu </v-icon>
+        </v-btn>
+        <v-btn>
+          <v-icon> mdi-dice-multiple </v-icon>
+        </v-btn>
       </v-list>
 
       <v-list v-else>

@@ -17,8 +17,8 @@
           >
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="error" text @click="dialog = false"> No </v-btn>
-            <v-btn color="success" text @click="delete_feature"> Yes </v-btn>
+            <v-btn color="success" text @click="dialog = false"> No </v-btn>
+            <v-btn color="error" text @click="delete_feature"> Yes </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

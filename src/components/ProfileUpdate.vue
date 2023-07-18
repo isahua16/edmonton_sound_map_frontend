@@ -48,7 +48,8 @@
       >Save</v-btn
     >
     <v-btn @click="click_cancel" v-if="!disabled" color="error">Cancel</v-btn>
-    <v-snackbar :color="snackbar_color" app :value="snackbar">
+    <delete-user></delete-user>
+    <v-snackbar :color="snackbar_color" app v-model="snackbar">
       <h3 class="text-center">{{ message }}</h3>
     </v-snackbar>
   </v-container>
@@ -57,7 +58,11 @@
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies";
+import DeleteUser from "@/components/DeleteUser.vue";
 export default {
+  components: {
+    DeleteUser,
+  },
   data() {
     return {
       username: undefined,
@@ -123,9 +128,8 @@ export default {
       this.bio_backup = this.bio;
     },
     click_save: function () {
-      this.disabled = !this.disabled;
       this.snackbar = false;
-      if (this.username != null && this.email != null && this.bio != null) {
+      if (this.username != "" && this.email != "" && this.bio != "") {
         this.loading = true;
         axios
           .request({
@@ -138,8 +142,8 @@ export default {
               bio: this.bio,
             },
           })
-          .then((res) => {
-            console.log(res);
+          .then(() => {
+            this.disabled = !this.disabled;
             this.loading = false;
             this.message = "Update succesfull";
             this.snackbar_color = "success";

@@ -1,14 +1,14 @@
 <template>
   <v-main>
-    <profile-display></profile-display>
+    <profile-update></profile-update>
   </v-main>
 </template>
 
 <script>
-import ProfileDisplay from "@/components/ProfileDisplay.vue";
+import ProfileUpdate from "@/components/ProfileUpdate.vue";
 export default {
   components: {
-    ProfileDisplay,
+    ProfileUpdate,
   },
 };
 </script>

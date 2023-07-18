@@ -4,13 +4,17 @@
       <v-tab>Features</v-tab>
       <v-tab @click="get_all_users">Users</v-tab>
       <v-tab-item>
-        <v-expansion-panels>
-          <feature-item
-            v-for="(feature, i) in features"
-            :key="i"
-            :feature="feature"
-          ></feature-item>
-        </v-expansion-panels>
+        <v-row justify="center">
+          <v-col cols="12">
+            <v-expansion-panels>
+              <feature-item
+                v-for="(feature, i) in features"
+                :key="i"
+                :feature="feature"
+              ></feature-item>
+            </v-expansion-panels>
+          </v-col>
+        </v-row>
       </v-tab-item>
       <v-tab-item><user-item></user-item></v-tab-item>
     </v-tabs>
