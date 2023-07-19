@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import MapMarkers from "@/components/MapMarkers.vue";
 export default {

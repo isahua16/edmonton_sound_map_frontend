@@ -17,9 +17,6 @@ export default {
     };
   },
   methods: {
-    marker_binding: function (marker, popup) {
-      marker.bindPopup(popup);
-    },
     get_categories: function () {
       if (this.feature.is_interior === 1) {
         this.interior = `<span class="pill">interior</span>`;
@@ -71,7 +68,7 @@ export default {
         .then((res) => {
           let src = URL.createObjectURL(res["data"]);
           this.popup.setContent(
-            `<div class="popup_header"><h3>${this.feature.name}</h3>${this.time}</div>
+            `<div id="${this.feature.feature_id}" class="popup_header"><h3>${this.feature.name}</h3>${this.time}</div>
             <div class="pill_container">
                 <span class="pill">${this.feature.season}</span>
                 ${this.interior}
@@ -91,14 +88,26 @@ export default {
   mounted() {
     this.popup = L.popup({});
     this.get_categories();
-    this.marker_binding(this.marker, this.popup);
+    this.marker.bindPopup(this.popup);
     this.marker.on("popupopen", this.get_feature_image);
+    this.$root.$on("random_popup", (id) => {
+      if (this.feature.feature_id === id) {
+        if (this.map.hasLayer(this.marker)) {
+          this.marker.openPopup();
+        } else {
+          this.$root.$emit("get_id");
+        }
+      }
+    });
   },
   props: {
     marker: {
       type: Object,
     },
     feature: {
+      type: Object,
+    },
+    map: {
       type: Object,
     },
   },

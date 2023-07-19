@@ -18,12 +18,14 @@
       <v-btn @click="menu = true" fab dark small color="primary">
         <v-icon>mdi-filter</v-icon>
       </v-btn>
-      <v-btn fab dark small color="primary">
+      <v-btn @click="$root.$emit('get_id')" fab dark small color="primary">
         <v-icon>mdi-dice-multiple</v-icon>
       </v-btn>
     </v-speed-dial>
     <v-menu
       absolute
+      :position-x="100000000"
+      :position-y="100000000"
       :close-on-content-click="false"
       v-model="menu"
       transition="scale-transition"
@@ -79,6 +81,7 @@ export default {
         is_natural: this.is_natural,
         is_societal: this.is_societal,
       });
+      this.$root.$emit("reset_filter");
     },
   },
   data() {

@@ -3,6 +3,7 @@
     v-if="marker"
     :marker="marker"
     :feature="feature"
+    :map="map"
   ></marker-popup>
 </template>
 
