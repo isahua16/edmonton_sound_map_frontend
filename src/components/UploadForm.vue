@@ -2,21 +2,20 @@
   <v-container>
     <h2 class="mt-5 mb-5">Submission</h2>
     <secondary-map class="mb-5"></secondary-map>
-    <v-text-field v-model="name" label="Name"></v-text-field>
-    <v-text-field disabled v-model="location" label="Location"></v-text-field>
+    <v-text-field v-model="name" label="Name*"></v-text-field>
+    <v-text-field disabled v-model="location" label="Location*"></v-text-field>
     <v-textarea
       v-model="description"
       auto-grow
       rows="1"
-      label="Description"
+      label="Description*"
     ></v-textarea>
     <v-container class="descriptors">
-      <v-select v-model="season" label="Season" :items="seasons"></v-select>
-      <v-select v-model="time" label="Time of Day" :items="times"></v-select>
+      <v-select v-model="season" label="Season*" :items="seasons"></v-select>
+      <v-select v-model="time" label="Time of Day*" :items="times"></v-select>
     </v-container>
     <v-container class="categories">
       <v-checkbox
-        dense
         :false-value="0"
         :true-value="1"
         label="Interior"
@@ -59,7 +58,7 @@
         v-model="audio"
         show-size
         prepend-icon="mdi-volume-high"
-        label="Audio"
+        label="Audio*"
       ></v-file-input>
     </v-container>
     <v-btn
@@ -100,7 +99,11 @@ export default {
         this.season &&
         this.audio &&
         this.time &&
-        Cookies.get("token")
+        Cookies.get("token") &&
+        (this.is_interior !== 0 ||
+          this.is_mechanical !== 0 ||
+          this.is_natural !== 0 ||
+          this.is_societal !== 0)
       ) {
         let form = new FormData();
         form.append("lat", this.lat);
@@ -112,8 +115,8 @@ export default {
         form.append("is_mechanical", this.is_mechanical);
         form.append("is_natural", this.is_natural);
         form.append("is_societal", this.is_societal);
-        form.append("season", this.season);
-        form.append("time", this.time);
+        form.append("season", this.season.toLowerCase());
+        form.append("time", this.time.toLowerCase());
         form.append("token", Cookies.get("token"));
         form.append("audio", this.audio);
         if (this.image != undefined) {
@@ -153,12 +156,32 @@ export default {
             this.icon = "mdi-alert-circle";
             this.message = "Upload failed";
           });
+      } else if (
+        this.lat &&
+        this.long &&
+        this.name &&
+        this.location &&
+        this.description &&
+        this.season &&
+        this.audio &&
+        this.time &&
+        Cookies.get("token") &&
+        this.is_interior == 0 &&
+        this.is_mechanical == 0 &&
+        this.is_natural == 0 &&
+        this.is_societal == 0
+      ) {
+        this.loading = false;
+        this.alert = true;
+        this.color = "red";
+        this.icon = "mdi-alert-circle";
+        this.message = "Must select at least one category";
       } else {
         this.loading = false;
         this.alert = true;
         this.color = "red";
         this.icon = "mdi-alert-circle";
-        this.message = "Missing information";
+        this.message = "Missing information.";
       }
     },
     get_latlng: function (lat, long, location) {
@@ -182,8 +205,8 @@ export default {
       is_societal: 0,
       season: undefined,
       time: undefined,
-      seasons: ["summer", "fall", "winter", "spring"],
-      times: ["day", "night"],
+      seasons: ["Summer", "Fall", "Winter", "Spring"],
+      times: ["Day", "Night"],
       alert: false,
       message: undefined,
       color: "red",

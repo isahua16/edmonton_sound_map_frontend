@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       marker: undefined,
+      force_update: 0,
     };
   },
   components: {
@@ -26,6 +27,17 @@ export default {
     ]);
     this.marker = L.marker(coordinates);
     this.marker.addTo(this.map);
+
+    this.$root.$on("filter_features", (filters) => {
+      filters = Object.entries(filters);
+      for (let i = 0; i < filters.length; i++) {
+        if (this.feature[filters[i][0]] === 1 && filters[i][1] === true) {
+          this.map.addLayer(this.marker);
+          return;
+        }
+      }
+      this.map.removeLayer(this.marker);
+    });
   },
   props: {
     map: {

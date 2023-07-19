@@ -15,10 +15,10 @@
           <v-icon v-else large> mdi-menu-up </v-icon>
         </v-btn>
       </template>
-      <v-btn @click="menu = true" fab dark small color="green">
+      <v-btn @click="menu = true" fab dark small color="primary">
         <v-icon>mdi-filter</v-icon>
       </v-btn>
-      <v-btn fab dark small color="indigo">
+      <v-btn fab dark small color="primary">
         <v-icon>mdi-dice-multiple</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -32,25 +32,25 @@
         <v-list>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="message" color="purple"></v-switch>
+              <v-switch v-model="is_interior" color="primary"></v-switch>
             </v-list-item-action>
             <v-list-item-title>Interior</v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="hints" color="purple"></v-switch>
+              <v-switch v-model="is_mechanical" color="primary"></v-switch>
             </v-list-item-action>
             <v-list-item-title>Mechanical</v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="hints" color="purple"></v-switch>
+              <v-switch v-model="is_natural" color="primary"></v-switch>
             </v-list-item-action>
             <v-list-item-title>Natural</v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="hints" color="purple"></v-switch>
+              <v-switch v-model="is_societal" color="primary"></v-switch>
             </v-list-item-action>
             <v-list-item-title>Societal</v-list-item-title>
           </v-list-item>
@@ -60,7 +60,7 @@
           <v-spacer></v-spacer>
 
           <v-btn text @click="menu = false"> Cancel </v-btn>
-          <v-btn color="primary" text @click="menu = false"> Save </v-btn>
+          <v-btn color="primary" text @click="apply_filter"> Save </v-btn>
         </v-card-actions>
       </v-card>
     </v-menu>
@@ -70,10 +70,25 @@
 <script>
 import MainMap from "@/components/MainMap.vue";
 export default {
+  methods: {
+    apply_filter: function () {
+      this.menu = false;
+      this.$root.$emit("filter_features", {
+        is_interior: this.is_interior,
+        is_mechanical: this.is_mechanical,
+        is_natural: this.is_natural,
+        is_societal: this.is_societal,
+      });
+    },
+  },
   data() {
     return {
       fab: false,
       menu: false,
+      is_interior: true,
+      is_mechanical: true,
+      is_natural: true,
+      is_societal: true,
     };
   },
   components: {

@@ -17,6 +17,9 @@ export default {
     };
   },
   methods: {
+    marker_binding: function (marker, popup) {
+      marker.bindPopup(popup);
+    },
     get_categories: function () {
       if (this.feature.is_interior === 1) {
         this.interior = `<span class="pill">interior</span>`;
@@ -88,7 +91,7 @@ export default {
   mounted() {
     this.popup = L.popup({});
     this.get_categories();
-    this.marker.bindPopup(this.popup);
+    this.marker_binding(this.marker, this.popup);
     this.marker.on("popupopen", this.get_feature_image);
   },
   props: {

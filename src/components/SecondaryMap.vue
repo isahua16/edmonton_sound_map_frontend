@@ -20,6 +20,12 @@ export default {
       if (this.marker != undefined) {
         this.marker.remove();
       }
+      this.$root.$emit(
+        "click_latlng",
+        e.latlng.lat,
+        e.latlng.lng,
+        "Loading..."
+      );
       this.marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
       this.geocoder.options.geocoder.reverse(e.latlng, 18, (results) => {
         this.$root.$emit(
