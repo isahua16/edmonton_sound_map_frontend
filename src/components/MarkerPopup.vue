@@ -92,11 +92,7 @@ export default {
     this.marker.on("popupopen", this.get_feature_image);
     this.$root.$on("random_popup", (id) => {
       if (this.feature.feature_id === id) {
-        if (this.map.hasLayer(this.marker)) {
-          this.marker.openPopup();
-        } else {
-          this.$root.$emit("get_id");
-        }
+        this.marker.openPopup();
       }
     });
   },

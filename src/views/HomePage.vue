@@ -18,7 +18,7 @@
       <v-btn @click="menu = true" fab dark small color="primary">
         <v-icon>mdi-filter</v-icon>
       </v-btn>
-      <v-btn @click="$root.$emit('get_id')" fab dark small color="primary">
+      <v-btn @click="random_click" fab dark small color="primary">
         <v-icon>mdi-dice-multiple</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -73,6 +73,15 @@
 import MainMap from "@/components/MainMap.vue";
 export default {
   methods: {
+    random_click: function () {
+      this.$root.$emit("get_id", {
+        is_interior: this.is_interior,
+        is_mechanical: this.is_mechanical,
+        is_natural: this.is_natural,
+        is_societal: this.is_societal,
+      });
+    },
+
     apply_filter: function () {
       this.menu = false;
       this.$root.$emit("filter_features", {
