@@ -5,7 +5,7 @@
         <v-btn
           :disabled="disabled"
           large
-          @click="dialog = !dialog"
+          @click="dialog = true"
           icon
           width="auto"
           height="auto"
@@ -99,18 +99,19 @@ export default {
             data: form,
             headers: { "Content-Type": "multipart/form-data" },
           })
-          .then((res) => {
-            console.log(res);
+          .then(() => {
             this.get_profile();
             this.dialog = false;
             this.image = null;
             this.loading = false;
-            this.$root.$emit("snackbar", true, "Upload succesfull", "success");
           })
           .catch(() => {
             this.loading = false;
             this.$root.$emit("snackbar", true, "Upload failed", "error");
           });
+      } else {
+        this.loading = false;
+        this.$root.$emit("snackbar", true, "Select an image", "error");
       }
     },
     click_edit: function () {

@@ -25,6 +25,7 @@
                 height="auto"
                 class="pa-1"
                 :outlined="!disabled"
+                @click="image_dialog = true"
               >
                 <v-avatar size="120">
                   <img class="avatar_image" :src="image" />
@@ -160,6 +161,34 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
+              <v-dialog v-model="image_dialog">
+                <v-card>
+                  <v-card-title class="text-h5"> Upload Image </v-card-title>
+                  <v-file-input
+                    class="mx-4"
+                    hint="500kB or less"
+                    persistent-hint
+                    v-model="new_image"
+                    show-size
+                    prepend-icon="mdi-image"
+                    label="Image"
+                  ></v-file-input>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="success" text @click="cancel_patch_image">
+                      No
+                    </v-btn>
+                    <v-btn
+                      :loading="image_loading"
+                      color="error"
+                      text
+                      @click="patch_image"
+                    >
+                      Yes
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-row>
           </v-expansion-panel-content>
         </v-col>
@@ -173,7 +202,6 @@ import Cookies from "vue-cookies";
 import axios from "axios";
 
 export default {
-  mounted() {},
   data() {
     return {
       image: null,
@@ -206,9 +234,45 @@ export default {
       delete_loading: false,
       remove_loading: false,
       approve_loading: false,
+      image_loading: false,
+      new_image: null,
+      image_dialog: false,
     };
   },
   methods: {
+    cancel_patch_image: function () {
+      this.image_dialog = false;
+      this.new_image = null;
+    },
+    patch_image: function () {
+      this.image_loading = true;
+      if (this.new_image != null) {
+        let form = new FormData();
+        form.append("token", Cookies.get("token"));
+        form.append("feature_id", this.feature.feature_id);
+        form.append("image", this.new_image);
+        axios
+          .request({
+            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/admin/feature/image`,
+            method: `PATCH`,
+            data: form,
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then(() => {
+            this.get_feature_image();
+            this.image_dialog = false;
+            this.new_image = null;
+            this.image_loading = false;
+          })
+          .catch(() => {
+            this.$root.$emit("snackbar", true, "Update failed", "error");
+            this.new_image = null;
+            this.image_loading = false;
+          });
+      } else {
+        this.$root.$emit("snackbar", true, "Select an image", "error");
+      }
+    },
     reset_feature_info: function () {
       this.local_feature_name = this.backup_feature_name;
       this.local_feature_description = this.backup_feature_description;
@@ -266,7 +330,7 @@ export default {
           .then(() => {
             this.disabled = true;
             this.edit_loading = false;
-            this.$root.$emit("snackbar", true, "Edit succesful", "success");
+            this.$root.$emit("snackbar", true, "Edit succesfull", "success");
           })
           .catch(() => {
             this.edit_loading = false;
@@ -294,7 +358,6 @@ export default {
         this.$root.$emit("snackbar", true, "Missing information", "error");
       }
     },
-    edit_feature_image: function () {},
     delete_feature: function () {
       this.delete_loading = true;
       this.dialog = false;
@@ -309,7 +372,7 @@ export default {
         })
         .then(() => {
           this.delete_loading = false;
-          this.$root.$emit("feature_delete", this.featurefeature_id);
+          this.$root.$emit("feature_delete", this.feature.feature_id);
           this.$root.$emit("snackbar", true, "Delete succesfull", "success");
         })
         .catch(() => {

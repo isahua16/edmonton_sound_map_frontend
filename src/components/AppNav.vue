@@ -202,12 +202,8 @@ export default {
             token: Cookies.get("token"),
           },
         })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .then(() => {})
+        .catch(() => {});
       Cookies.remove("token");
       Cookies.remove("is_admin");
       if (this.$route.path !== `/`) {
