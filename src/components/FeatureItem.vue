@@ -7,7 +7,7 @@
             disable-icon-rotate
             @click="get_feature_media"
             ><h2>{{ local_feature_name }}</h2>
-            <template v-if="is_approved == 0" v-slot:actions>
+            <template v-if="feature.is_approved === 0" v-slot:actions>
               <v-icon color="warning"> mdi-alert-circle </v-icon>
             </template>
             <template v-else v-slot:actions>
@@ -100,40 +100,40 @@
             </v-row>
             <v-row class="my-8">
               <v-btn
-                v-if="is_approved === false && disabled == true"
+                v-if="feature.is_approved === 0 && disabled == true"
                 color="success"
                 @click="approve_feature"
                 :loading="approve_loading"
                 >Publish</v-btn
               >
               <v-btn
-                v-if="is_approved == true && disabled == true"
+                v-if="feature.is_approved === 1 && disabled == true"
                 color="warning"
                 @click="remove_feature"
                 :loading="remove_loading"
                 >Unpublish</v-btn
               >
               <v-btn
-                v-if="is_approved == false && disabled == true"
+                v-if="feature.is_approved === 0 && disabled == true"
                 color="warning"
                 @click="start_edit_info"
                 >Edit</v-btn
               >
               <v-btn
-                v-if="is_approved == false && disabled == true"
+                v-if="feature.is_approved === 0 && disabled == true"
                 color="error"
                 @click="dialog = true"
                 >Delete</v-btn
               >
               <v-btn
-                v-if="is_approved == false && disabled == false"
+                v-if="feature.is_approved === 0 && disabled == false"
                 color="success"
                 @click="edit_feature_info"
                 :loading="edit_loading"
                 >Save</v-btn
               >
               <v-btn
-                v-if="is_approved == false && disabled == false"
+                v-if="feature.is_approved === 0 && disabled == false"
                 color="error"
                 @click="cancel_edit_info"
                 >Cancel</v-btn
@@ -206,7 +206,6 @@ export default {
     return {
       image: null,
       audio: null,
-      is_approved: !!this.feature.is_approved,
       disabled: true,
       local_feature_name: this.feature.name,
       local_feature_description: this.feature.description,
@@ -392,7 +391,7 @@ export default {
           },
         })
         .then(() => {
-          this.is_approved = false;
+          this.$root.$emit("status_change", this.index, 0);
           this.remove_loading = false;
         })
         .catch(() => {
@@ -412,7 +411,7 @@ export default {
         })
         .then(() => {
           this.approve_loading = false;
-          this.is_approved = true;
+          this.$root.$emit("status_change", this.index, 1);
           this.$root.$emit("snackbar", true, "Publish successfull", "success");
         })
         .catch(() => {
@@ -460,6 +459,9 @@ export default {
   props: {
     feature: {
       type: Object,
+    },
+    index: {
+      type: Number,
     },
   },
 };

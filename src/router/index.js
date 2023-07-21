@@ -6,6 +6,7 @@ import ConnectPage from "@/views/ConnectPage.vue";
 import UploadPage from "@/views/UploadPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
+import SubmissionsPage from "@/views/SubmissionsPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -32,6 +33,10 @@ const routes = [
   {
     path: `/profile`,
     component: ProfilePage,
+  },
+  {
+    path: `/submissions`,
+    component: SubmissionsPage,
   },
 ];
 

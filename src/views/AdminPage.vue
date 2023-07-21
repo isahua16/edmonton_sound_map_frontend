@@ -4,12 +4,20 @@
       <v-tab>Features</v-tab>
       <v-tab @click="get_all_users">Users</v-tab>
       <v-tab-item>
-        <v-row justify="center">
+        <v-container v-if="features.length === 0">
+          <v-row justify="center">
+            <v-col cols="auto">
+              <h2>No submissions</h2>
+            </v-col>
+          </v-row>
+        </v-container>
+        <v-row v-else justify="center">
           <v-col cols="12">
             <v-expansion-panels>
               <feature-item
                 v-for="(feature, i) in features"
                 :key="i"
+                :index="i"
                 :feature="feature"
               ></feature-item>
             </v-expansion-panels>
@@ -63,11 +71,14 @@ export default {
     UserItem,
   },
   mounted() {
-    if (Cookies.get("is_admin") == null) {
+    if (Cookies.get("is_admin") == null || Cookies.get("token") == null) {
       this.$router.path(`/`);
     }
     this.get_all_features();
     this.$root.$on("feature_delete", this.delete_feature);
+    this.$root.$on("status_change", (index, status) => {
+      this.features[index]["is_approved"] = status;
+    });
   },
 };
 </script>

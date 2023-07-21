@@ -61,8 +61,6 @@ export default {
         this.random_id = id;
       } else if (empty_array.length === 1) {
         this.$root.$emit("random_popup", empty_array[0][`feature_id`]);
-      } else {
-        this.$root.$emit("snackbar", true, "No markers on map", "error");
       }
     },
     get_features: function () {
