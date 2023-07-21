@@ -181,7 +181,7 @@ export default {
         this.alert = true;
         this.color = "red";
         this.icon = "mdi-alert-circle";
-        this.message = "Missing information.";
+        this.message = "Missing information";
       }
     },
     get_latlng: function (lat, long, location) {

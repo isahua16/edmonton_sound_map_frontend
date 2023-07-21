@@ -46,24 +46,32 @@
             <v-row dense>
               <v-col cols="1">
                 <v-checkbox
+                  :true-value="1"
+                  :false-value="0"
                   dense
                   :disabled="disabled"
                   label="Interior"
                   v-model="local_feature_interior"
                 ></v-checkbox>
                 <v-checkbox
+                  :true-value="1"
+                  :false-value="0"
                   dense
                   :disabled="disabled"
                   label="Mechanical"
                   v-model="local_feature_mechanical"
                 ></v-checkbox>
                 <v-checkbox
+                  :true-value="1"
+                  :false-value="0"
                   dense
                   :disabled="disabled"
                   label="Natural"
                   v-model="local_feature_natural"
                 ></v-checkbox>
                 <v-checkbox
+                  :true-value="1"
+                  :false-value="0"
                   dense
                   :disabled="disabled"
                   label="Societal"
@@ -89,12 +97,70 @@
                 :src="audio"
               ></audio>
             </v-row>
-            <edit-feature
-              @status_changed="new_approval"
-              :status="is_approved"
-              :feature_id="feature.feature_id"
-              :disabled="disabled"
-            ></edit-feature>
+            <v-row class="my-8">
+              <v-btn
+                v-if="is_approved === false && disabled == true"
+                color="success"
+                @click="approve_feature"
+                :loading="approve_loading"
+                >Publish</v-btn
+              >
+              <v-btn
+                v-if="is_approved == true && disabled == true"
+                color="warning"
+                @click="remove_feature"
+                :loading="remove_loading"
+                >Unpublish</v-btn
+              >
+              <v-btn
+                v-if="is_approved == false && disabled == true"
+                color="warning"
+                @click="start_edit_info"
+                >Edit</v-btn
+              >
+              <v-btn
+                v-if="is_approved == false && disabled == true"
+                color="error"
+                @click="dialog = true"
+                >Delete</v-btn
+              >
+              <v-btn
+                v-if="is_approved == false && disabled == false"
+                color="success"
+                @click="edit_feature_info"
+                :loading="edit_loading"
+                >Save</v-btn
+              >
+              <v-btn
+                v-if="is_approved == false && disabled == false"
+                color="error"
+                @click="cancel_edit_info"
+                >Cancel</v-btn
+              >
+              <v-dialog v-model="dialog">
+                <v-card>
+                  <v-card-title class="text-h5"> Delete feature </v-card-title>
+                  <v-card-text
+                    >Are you sure you want to delete this
+                    submission?</v-card-text
+                  >
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="success" text @click="dialog = false">
+                      No
+                    </v-btn>
+                    <v-btn
+                      :loading="delete_loading"
+                      color="error"
+                      text
+                      @click="delete_feature"
+                    >
+                      Yes
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
           </v-expansion-panel-content>
         </v-col>
       </v-row>
@@ -105,21 +171,9 @@
 <script>
 import Cookies from "vue-cookies";
 import axios from "axios";
-import EditFeature from "@/components/EditFeature.vue";
 
 export default {
-  mounted() {
-    this.$root.$on("edit_info", () => {
-      this.disabled = false;
-    });
-    this.$root.$on("cancel_edit", () => {
-      this.disabled = true;
-    });
-    this.$root.$on("save_edit", () => {});
-  },
-  components: {
-    EditFeature,
-  },
+  mounted() {},
   data() {
     return {
       image: null,
@@ -137,13 +191,162 @@ export default {
         this.feature.season.slice(1),
       local_feature_time:
         this.feature.time.charAt(0).toUpperCase() + this.feature.time.slice(1),
+      backup_feature_name: undefined,
+      backup_feature_description: undefined,
+      backup_feature_interior: undefined,
+      backup_feature_mechanical: undefined,
+      backup_feature_natural: undefined,
+      backup_feature_societal: undefined,
+      backup_feature_season: undefined,
+      backup_feature_time: undefined,
       seasons: ["Summer", "Fall", "Winter", "Spring"],
       times: ["Day", "Night"],
+      dialog: false,
+      edit_loading: false,
+      delete_loading: false,
+      remove_loading: false,
+      approve_loading: false,
     };
   },
   methods: {
-    new_approval: function (bool) {
-      this.is_approved = bool;
+    reset_feature_info: function () {
+      this.local_feature_name = this.backup_feature_name;
+      this.local_feature_description = this.backup_feature_description;
+      this.local_feature_interior = this.backup_feature_interior;
+      this.local_feature_mechanical = this.backup_feature_mechanical;
+      this.local_feature_natural = this.backup_feature_natural;
+      this.local_feature_societal = this.backup_feature_societal;
+      this.local_feature_season = this.backup_feature_season;
+      this.local_feature_time = this.backup_feature_time;
+    },
+    start_edit_info: function () {
+      this.disabled = false;
+      this.backup_feature_name = this.local_feature_name;
+      this.backup_feature_description = this.local_feature_description;
+      this.backup_feature_interior = this.local_feature_interior;
+      this.backup_feature_mechanical = this.local_feature_mechanical;
+      this.backup_feature_natural = this.local_feature_natural;
+      this.backup_feature_societal = this.local_feature_societal;
+      this.backup_feature_season = this.local_feature_season;
+      this.backup_feature_time = this.local_feature_time;
+    },
+    cancel_edit_info: function () {
+      this.disabled = true;
+      this.reset_feature_info();
+    },
+    edit_feature_info: function () {
+      this.edit_loading = true;
+      if (
+        this.local_feature_name != "" &&
+        this.local_feature_description != "" &&
+        this.local_feature_time != "" &&
+        this.local_feature_season &&
+        (this.local_feature_interior !== 0 ||
+          this.local_feature_mechanical !== 0 ||
+          this.local_feature_natural !== 0 ||
+          this.local_feature_societal !== 0)
+      ) {
+        axios
+          .request({
+            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/admin/feature`,
+            method: `PATCH`,
+            data: {
+              name: this.local_feature_name,
+              description: this.local_feature_description,
+              is_interior: this.local_feature_interior,
+              is_mechanical: this.local_feature_mechanical,
+              is_natural: this.local_feature_natural,
+              is_societal: this.local_feature_societal,
+              season: this.local_feature_season.toLowerCase(),
+              time: this.local_feature_time.toLowerCase(),
+              token: Cookies.get("token"),
+              feature_id: this.feature.feature_id,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            this.disabled = true;
+            this.edit_loading = false;
+          })
+          .catch((err) => {
+            console.log(err);
+            this.edit_loading = false;
+          });
+      } else if (
+        this.local_feature_name !== "" &&
+        this.local_feature_description !== "" &&
+        this.local_feature_interior === 0 &&
+        this.local_feature_mechanical === 0 &&
+        this.local_feature_natural === 0 &&
+        this.local_feature_societal === 0 &&
+        this.local_feature_season !== "" &&
+        this.local_feature_time !== 0
+      ) {
+        this.edit_loading = false;
+        console.log("Must select at least one category");
+      } else {
+        this.edit_loading = false;
+        console.log("Missing information");
+      }
+    },
+    edit_feature_image: function () {},
+    delete_feature: function () {
+      this.delete_loading = true;
+      this.dialog = false;
+      axios
+        .request({
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/admin/feature`,
+          method: `DELETE`,
+          data: {
+            token: Cookies.get(`token`),
+            feature_id: this.feature.feature_id,
+          },
+        })
+        .then(() => {
+          this.delete_loading = false;
+          this.$root.$emit("feature_delete", this.featurefeature_id);
+        })
+        .catch(() => {
+          this.delete_loading = false;
+        });
+    },
+    remove_feature: function () {
+      this.remove_loading = true;
+      axios
+        .request({
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/admin/feature/reject`,
+          method: `PATCH`,
+          data: {
+            token: Cookies.get("token"),
+            feature_id: this.feature.feature_id,
+          },
+        })
+        .then(() => {
+          this.is_approved = false;
+          this.remove_loading = false;
+        })
+        .catch(() => {
+          this.remove_loading = false;
+        });
+    },
+    approve_feature: function () {
+      this.approve_loading = true;
+      axios
+        .request({
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/admin/feature/approve`,
+          method: `PATCH`,
+          data: {
+            token: Cookies.get("token"),
+            feature_id: this.feature.feature_id,
+          },
+        })
+        .then(() => {
+          this.approve_loading = false;
+          this.is_approved = true;
+        })
+        .catch(() => {
+          this.approve_loading = false;
+        });
     },
     get_feature_image: function () {
       axios
