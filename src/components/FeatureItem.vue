@@ -263,14 +263,14 @@ export default {
               feature_id: this.feature.feature_id,
             },
           })
-          .then((res) => {
-            console.log(res);
+          .then(() => {
             this.disabled = true;
             this.edit_loading = false;
+            this.$root.$emit("snackbar", true, "Edit succesful", "success");
           })
-          .catch((err) => {
-            console.log(err);
+          .catch(() => {
             this.edit_loading = false;
+            this.$root.$emit("snackbar", true, "Edit failed", "error");
           });
       } else if (
         this.local_feature_name !== "" &&
@@ -283,10 +283,15 @@ export default {
         this.local_feature_time !== 0
       ) {
         this.edit_loading = false;
-        console.log("Must select at least one category");
+        this.$root.$emit(
+          "snackbar",
+          true,
+          "Must select at least one category",
+          "error"
+        );
       } else {
         this.edit_loading = false;
-        console.log("Missing information");
+        this.$root.$emit("snackbar", true, "Missing information", "error");
       }
     },
     edit_feature_image: function () {},
@@ -305,9 +310,11 @@ export default {
         .then(() => {
           this.delete_loading = false;
           this.$root.$emit("feature_delete", this.featurefeature_id);
+          this.$root.$emit("snackbar", true, "Delete succesfull", "success");
         })
         .catch(() => {
           this.delete_loading = false;
+          this.$root.$emit("snackbar", true, "Delete failed", "error");
         });
     },
     remove_feature: function () {
@@ -343,9 +350,11 @@ export default {
         .then(() => {
           this.approve_loading = false;
           this.is_approved = true;
+          this.$root.$emit("snackbar", true, "Publish successfull", "success");
         })
         .catch(() => {
           this.approve_loading = false;
+          this.$root.$emit("snackbar", true, "Publish failed", "error");
         });
     },
     get_feature_image: function () {

@@ -17,14 +17,6 @@
       type="password"
     ></v-text-field>
     <v-btn class="my-5" @click="signup_click" color="primary"> Submit </v-btn>
-    <v-alert
-      :value="alert"
-      color="red"
-      icon="mdi-alert-circle"
-      transition="scale-transition"
-    >
-      {{ message }}
-    </v-alert>
   </v-container>
 </template>
 <script>
@@ -33,8 +25,6 @@ import Cookies from "vue-cookies";
 export default {
   methods: {
     signup_click: function () {
-      this.alert = false;
-      this.message = undefined;
       if (
         this.email_input != "" &&
         this.username_input != "" &&
@@ -61,19 +51,15 @@ export default {
             }
           })
           .catch(() => {
-            this.message = "Something went wrong";
-            this.alert = true;
+            this.$root.$emit("snackbar", true, "Sign up failed", "error");
           });
       } else {
-        this.message = "All fields are required";
-        this.alert = true;
+        this.$root.$emit("snackbar", true, "All fields are required", "error");
       }
     },
   },
   data() {
     return {
-      alert: false,
-      message: undefined,
       email_input: "",
       username_input: "",
       password_input: "",

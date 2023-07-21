@@ -12,14 +12,6 @@
       type="password"
     ></v-text-field>
     <v-btn class="my-5" @click="login_click" color="primary"> Submit</v-btn>
-    <v-alert
-      :value="alert"
-      color="red"
-      icon="mdi-alert-circle"
-      transition="scale-transition"
-    >
-      {{ message }}
-    </v-alert>
   </v-container>
 </template>
 
@@ -29,8 +21,6 @@ import Cookies from "vue-cookies";
 export default {
   methods: {
     login_click: function () {
-      this.alert = false;
-      this.message = undefined;
       if (this.email_input != "" && this.password_input != "") {
         axios
           .request({
@@ -52,21 +42,16 @@ export default {
               this.$router.push(`/`);
             }
           })
-          .catch((err) => {
-            console.log(err);
-            this.alert = true;
-            this.message = "Login failed";
+          .catch(() => {
+            this.$root.$emit("snackbar", true, "Login failed", "error");
           });
       } else {
-        this.alert = true;
-        this.message = "All fields are required";
+        this.$root.$emit("snackbar", true, "All fields are required", "error");
       }
     },
   },
   data() {
     return {
-      alert: false,
-      message: undefined,
       email_input: "",
       password_input: "",
     };

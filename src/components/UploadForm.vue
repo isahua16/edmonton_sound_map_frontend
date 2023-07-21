@@ -16,6 +16,7 @@
     </v-container>
     <v-container class="categories">
       <v-checkbox
+        dense
         :false-value="0"
         :true-value="1"
         label="Interior"
@@ -69,14 +70,6 @@
       color="primary"
       >Submit</v-btn
     >
-    <v-alert
-      :value="alert"
-      :color="color"
-      :icon="icon"
-      transition="scale-transition"
-    >
-      {{ message }}
-    </v-alert>
   </v-container>
 </template>
 
@@ -88,8 +81,6 @@ export default {
   methods: {
     post_feature: function () {
       this.loading = true;
-      this.alert = false;
-      this.message = undefined;
       if (
         this.lat &&
         this.long &&
@@ -131,10 +122,12 @@ export default {
           })
           .then(() => {
             this.loading = false;
-            this.alert = true;
-            this.color = "green";
-            this.icon = "mdi-check-circle";
-            this.message = "Upload succesful. Awaiting admin approval";
+            this.$root.$emit(
+              "snackbar",
+              true,
+              "Upload succesful. Awaiting admin approval",
+              "success"
+            );
             this.lat = undefined;
             this.long = undefined;
             this.name = undefined;
@@ -151,10 +144,7 @@ export default {
           })
           .catch(() => {
             this.loading = false;
-            this.alert = true;
-            this.color = "red";
-            this.icon = "mdi-alert-circle";
-            this.message = "Upload failed";
+            this.$root.$emit("snackbar", true, "Upload failed", "error");
           });
       } else if (
         this.lat &&
@@ -172,16 +162,16 @@ export default {
         this.is_societal == 0
       ) {
         this.loading = false;
-        this.alert = true;
-        this.color = "red";
-        this.icon = "mdi-alert-circle";
-        this.message = "Must select at least one category";
+        this.$root.$emit(
+          "snackbar",
+          true,
+          "Must select at least one category",
+          "error"
+        );
       } else {
         this.loading = false;
-        this.alert = true;
-        this.color = "red";
-        this.icon = "mdi-alert-circle";
-        this.message = "Missing information";
+        ("Must select at least one category");
+        this.$root.$emit("snackbar", true, "Missing information", "error");
       }
     },
     get_latlng: function (lat, long, location) {
@@ -207,10 +197,6 @@ export default {
       time: undefined,
       seasons: ["Summer", "Fall", "Winter", "Spring"],
       times: ["Day", "Night"],
-      alert: false,
-      message: undefined,
-      color: "red",
-      icon: "mdi-alert-circle",
       loading: false,
     };
   },

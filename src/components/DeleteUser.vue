@@ -26,9 +26,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-snackbar :color="snackbar_color" app v-model="snackbar">
-        <h3 class="text-center">{{ message }}</h3>
-      </v-snackbar>
     </v-col>
   </v-row>
 </template>
@@ -41,11 +38,9 @@ export default {
     cancel_delete: function () {
       this.dialog = !this.dialog;
       this.password_input = "";
-      this.snackbar = false;
     },
     delete_user: function () {
       this.loading = true;
-      this.snackbar = false;
       if (this.password_input != undefined) {
         axios
           .request({
@@ -58,9 +53,6 @@ export default {
           })
           .then(() => {
             this.loading = false;
-            this.message = "Delete succesfull";
-            this.snackbar_color = "success";
-            this.snackbar = true;
             Cookies.remove("token");
             if (Cookies.get("is_admin")) {
               Cookies.remove("is_admin");
@@ -70,15 +62,11 @@ export default {
           })
           .catch(() => {
             this.loading = false;
-            this.message = "Delete failed";
-            this.snackbar_color = "error";
-            this.snackbar = true;
+            this.$root.$emit("snackbar", true, "Delete failed", "error");
           });
       } else {
         this.loading = false;
-        this.message = "Must enter password";
-        this.snackbar_color = "error";
-        this.snackbar = true;
+        this.$root.$emit("snackbar", true, "Must enter password", "error");
       }
     },
   },
@@ -87,9 +75,6 @@ export default {
       dialog: false,
       password_input: "",
       loading: false,
-      message: undefined,
-      snackbar: false,
-      snackbar_color: "error",
     };
   },
 };

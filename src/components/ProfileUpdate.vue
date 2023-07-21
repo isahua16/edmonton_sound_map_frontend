@@ -52,9 +52,6 @@
     >
     <v-btn @click="click_cancel" v-if="!disabled" color="error">Cancel</v-btn>
     <delete-user></delete-user>
-    <v-snackbar :color="snackbar_color" app v-model="snackbar">
-      <h3 class="text-center">{{ message }}</h3>
-    </v-snackbar>
   </v-container>
 </template>
 
@@ -79,9 +76,6 @@ export default {
       bio_backup: undefined,
       dialog: false,
       loading: false,
-      snackbar: false,
-      snackbar_color: "error",
-      message: undefined,
     };
   },
   mounted() {
@@ -93,9 +87,8 @@ export default {
       this.image = null;
     },
     update_image: function () {
+      this.loading = true;
       if (this.image != null) {
-        this.snackbar = false;
-        this.loading = true;
         let form = new FormData();
         form.append("image", this.image);
         form.append("token", Cookies.get("token"));
@@ -112,15 +105,11 @@ export default {
             this.dialog = false;
             this.image = null;
             this.loading = false;
-            this.message = "Upload succesfull";
-            this.snackbar = true;
-            this.snackbar_color = "success";
+            this.$root.$emit("snackbar", true, "Upload succesfull", "success");
           })
           .catch(() => {
             this.loading = false;
-            this.message = "Upload failed";
-            this.snackbar_color = "error";
-            this.snackbar = true;
+            this.$root.$emit("snackbar", true, "Upload failed", "error");
           });
       }
     },
@@ -131,9 +120,8 @@ export default {
       this.bio_backup = this.bio;
     },
     click_save: function () {
-      this.snackbar = false;
+      this.loading = true;
       if (this.username != "" && this.email != "" && this.bio != "") {
-        this.loading = true;
         axios
           .request({
             url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user`,
@@ -148,21 +136,15 @@ export default {
           .then(() => {
             this.disabled = !this.disabled;
             this.loading = false;
-            this.message = "Update succesfull";
-            this.snackbar_color = "success";
-            this.snackbar = true;
+            this.$root.$emit("snackbar", true, "Update succesfull", "success");
           })
           .catch(() => {
             this.loading = false;
-            this.message = "Update failed";
-            this.snackbar_color = "error";
-            this.snackbar = true;
+            this.$root.$emit("snackbar", true, "Update failed", "error");
           });
       } else {
-        this.message = "Fields cannot be empty";
-        this.snackbar_color = "error";
-        this.snackbar = true;
         this.loading = false;
+        this.$root.$emit("snackbar", true, "Fields cannot be empty", "error");
       }
     },
     click_cancel: function () {
@@ -181,12 +163,9 @@ export default {
           responseType: "blob",
         })
         .then((res) => {
-          console.log(res);
           this.image_src = URL.createObjectURL(res["data"]);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     },
     get_profile: function () {
       axios
@@ -197,15 +176,12 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
           this.username = res[`data`][0][`username`];
           this.email = res[`data`][0][`email`];
           this.bio = res[`data`][0][`bio`];
           this.get_user_image();
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     },
   },
 };
