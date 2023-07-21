@@ -3,11 +3,14 @@
     <v-row dense justify="center">
       <v-col cols="auto">
         <v-btn
+          :disabled="disabled"
+          large
           @click="dialog = !dialog"
           icon
           width="auto"
           height="auto"
           class="pa-1"
+          :outlined="!disabled"
         >
           <v-avatar size="120">
             <img class="avatar_image" :src="image_src" alt="" />

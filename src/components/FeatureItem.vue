@@ -1,32 +1,104 @@
 <template>
   <v-expansion-panel>
-    <v-expansion-panel-header disable-icon-rotate @click="get_feature_media"
-      ><h2>{{ feature.name }}</h2>
-      <template v-if="is_approved == 0" v-slot:actions>
-        <v-icon color="warning"> mdi-alert-circle </v-icon>
-      </template>
-      <template v-else v-slot:actions>
-        <v-icon color="success"> mdi-check-circle </v-icon>
-      </template>
-    </v-expansion-panel-header>
-    <v-expansion-panel-content>
-      <v-container>
-        <h3>{{ feature.name }}</h3>
-        <p>{{ feature.description }}</p>
-        <img width="300px " :src="image" />
-        <audio
-          style="display: block; width: 300px; margin-top: 10px"
-          controls
-          controlsList="nodownload"
-          :src="audio"
-        ></audio>
-        <edit-feature
-          @status_changed="new_approval"
-          :status="is_approved"
-          :feature_id="feature.feature_id"
-        ></edit-feature>
-      </v-container>
-    </v-expansion-panel-content>
+    <v-container>
+      <v-row no-gutters>
+        <v-col cols="12">
+          <v-expansion-panel-header
+            disable-icon-rotate
+            @click="get_feature_media"
+            ><h2>{{ local_feature_name }}</h2>
+            <template v-if="is_approved == 0" v-slot:actions>
+              <v-icon color="warning"> mdi-alert-circle </v-icon>
+            </template>
+            <template v-else v-slot:actions>
+              <v-icon color="success"> mdi-check-circle </v-icon>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-row no-gutters justify="center" class="my-5">
+              <v-btn
+                justify="center"
+                large
+                :disabled="disabled"
+                icon
+                width="auto"
+                height="auto"
+                class="pa-1"
+                :outlined="!disabled"
+              >
+                <v-avatar size="120">
+                  <img class="avatar_image" :src="image" />
+                </v-avatar>
+              </v-btn>
+            </v-row>
+            <v-text-field
+              class="text-h5"
+              :disabled="disabled"
+              v-model="local_feature_name"
+            ></v-text-field>
+            <v-textarea
+              auto-grow
+              rows="2"
+              row-height="15"
+              :disabled="disabled"
+              v-model="local_feature_description"
+            ></v-textarea>
+            <v-row dense>
+              <v-col cols="1">
+                <v-checkbox
+                  dense
+                  :disabled="disabled"
+                  label="Interior"
+                  v-model="local_feature_interior"
+                ></v-checkbox>
+                <v-checkbox
+                  dense
+                  :disabled="disabled"
+                  label="Mechanical"
+                  v-model="local_feature_mechanical"
+                ></v-checkbox>
+                <v-checkbox
+                  dense
+                  :disabled="disabled"
+                  label="Natural"
+                  v-model="local_feature_natural"
+                ></v-checkbox>
+                <v-checkbox
+                  dense
+                  :disabled="disabled"
+                  label="Societal"
+                  v-model="local_feature_societal"
+                ></v-checkbox>
+              </v-col>
+            </v-row>
+            <v-select
+              v-model="local_feature_season"
+              :items="seasons"
+              :disabled="disabled"
+            ></v-select>
+            <v-select
+              v-model="local_feature_time"
+              :items="times"
+              :disabled="disabled"
+            ></v-select>
+            <v-row justify="center" class="my-2">
+              <audio
+                style="display: block; width: 100%; margin-top: 10px"
+                controls
+                controlsList="nodownload"
+                :src="audio"
+              ></audio>
+            </v-row>
+            <edit-feature
+              @status_changed="new_approval"
+              :status="is_approved"
+              :feature_id="feature.feature_id"
+              :disabled="disabled"
+            ></edit-feature>
+          </v-expansion-panel-content>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-expansion-panel>
 </template>
 
@@ -34,7 +106,17 @@
 import Cookies from "vue-cookies";
 import axios from "axios";
 import EditFeature from "@/components/EditFeature.vue";
+
 export default {
+  mounted() {
+    this.$root.$on("edit_info", () => {
+      this.disabled = false;
+    });
+    this.$root.$on("cancel_edit", () => {
+      this.disabled = true;
+    });
+    this.$root.$on("save_edit", () => {});
+  },
   components: {
     EditFeature,
   },
@@ -43,6 +125,20 @@ export default {
       image: null,
       audio: null,
       is_approved: !!this.feature.is_approved,
+      disabled: true,
+      local_feature_name: this.feature.name,
+      local_feature_description: this.feature.description,
+      local_feature_interior: this.feature.is_interior,
+      local_feature_mechanical: this.feature.is_mechanical,
+      local_feature_natural: this.feature.is_natural,
+      local_feature_societal: this.feature.is_societal,
+      local_feature_season:
+        this.feature.season.charAt(0).toUpperCase() +
+        this.feature.season.slice(1),
+      local_feature_time:
+        this.feature.time.charAt(0).toUpperCase() + this.feature.time.slice(1),
+      seasons: ["Summer", "Fall", "Winter", "Spring"],
+      times: ["Day", "Night"],
     };
   },
   methods: {
@@ -95,6 +191,7 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 768px) {
+.avatar_image {
+  object-fit: cover;
 }
 </style>

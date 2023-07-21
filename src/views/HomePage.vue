@@ -34,36 +34,45 @@
         <v-list>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="is_interior" color="primary"></v-switch>
+              <v-switch
+                @click="apply_filter"
+                v-model="is_interior"
+                color="primary"
+              ></v-switch>
             </v-list-item-action>
             <v-list-item-title>Interior</v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="is_mechanical" color="primary"></v-switch>
+              <v-switch
+                @click="apply_filter"
+                v-model="is_mechanical"
+                color="primary"
+              ></v-switch>
             </v-list-item-action>
             <v-list-item-title>Mechanical</v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="is_natural" color="primary"></v-switch>
+              <v-switch
+                @click="apply_filter"
+                v-model="is_natural"
+                color="primary"
+              ></v-switch>
             </v-list-item-action>
             <v-list-item-title>Natural</v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-action>
-              <v-switch v-model="is_societal" color="primary"></v-switch>
+              <v-switch
+                @click="apply_filter"
+                v-model="is_societal"
+                color="primary"
+              ></v-switch>
             </v-list-item-action>
             <v-list-item-title>Societal</v-list-item-title>
           </v-list-item>
         </v-list>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn text @click="menu = false"> Cancel </v-btn>
-          <v-btn color="primary" text @click="apply_filter"> Save </v-btn>
-        </v-card-actions>
       </v-card>
     </v-menu>
   </v-main>
