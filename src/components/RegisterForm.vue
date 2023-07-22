@@ -2,16 +2,19 @@
   <v-container>
     <h2 class="mt-16">Register</h2>
     <v-text-field
+      @keyup.enter="signup_click"
       v-model="email_input"
       label="Email"
       type="text"
     ></v-text-field>
     <v-text-field
+      @keyup.enter="signup_click"
       v-model="username_input"
       label="Username"
       type="text"
     ></v-text-field>
     <v-text-field
+      @keyup.enter="signup_click"
       v-model="password_input"
       label="Password"
       type="password"
@@ -21,7 +24,6 @@
 </template>
 <script>
 import axios from "axios";
-import Cookies from "vue-cookies";
 export default {
   methods: {
     signup_click: function () {
@@ -40,14 +42,15 @@ export default {
               password: this.password_input,
             },
           })
-          .then((res) => {
-            Cookies.set("token", res[`data`][0][`token`]);
-            if (res[`data`][0][`is_admin`] == 1) {
-              Cookies.set("is_admin", true);
-            }
-            this.$root.$emit("token_update");
-            if (this.$route.path !== `/`) {
-              this.$router.push(`/`);
+          .then(() => {
+            this.$root.$emit(
+              "snackbar",
+              true,
+              "Verification email sent",
+              "success"
+            );
+            if (this.$route.path !== `/login`) {
+              this.$router.push(`/login`);
             }
           })
           .catch(() => {

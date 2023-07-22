@@ -2,9 +2,19 @@
   <v-container>
     <h2 class="mt-5 mb-5">Submission</h2>
     <secondary-map class="mb-5"></secondary-map>
-    <v-text-field v-model="name" label="Name*"></v-text-field>
-    <v-text-field disabled v-model="location" label="Location*"></v-text-field>
+    <v-text-field
+      @keyup.enter="post_feature"
+      v-model="name"
+      label="Name*"
+    ></v-text-field>
+    <v-text-field
+      @keyup.enter="post_feature"
+      disabled
+      v-model="location"
+      label="Location*"
+    ></v-text-field>
     <v-textarea
+      @keyup.enter="post_feature"
       v-model="description"
       auto-grow
       rows="1"
@@ -46,6 +56,7 @@
     </v-container>
     <v-container class="files">
       <v-file-input
+        @keyup.enter="post_feature"
         hint="500kB or less"
         persistent-hint
         v-model="image"
@@ -54,6 +65,7 @@
         label="Image"
       ></v-file-input>
       <v-file-input
+        @keyup.enter="post_feature"
         hint="50MB or less"
         persistent-hint
         v-model="audio"

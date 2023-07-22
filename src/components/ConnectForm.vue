@@ -2,11 +2,13 @@
   <v-container>
     <h2 class="mt-16">Connect</h2>
     <v-text-field
+      @keyup.enter="login_click"
       v-model="email_input"
       label="Email"
       type="text"
     ></v-text-field>
     <v-text-field
+      @keyup.enter="login_click"
       v-model="password_input"
       label="Password"
       type="password"
@@ -42,8 +44,13 @@ export default {
               this.$router.push(`/`);
             }
           })
-          .catch(() => {
-            this.$root.$emit("snackbar", true, "Login failed", "error");
+          .catch((err) => {
+            this.$root.$emit(
+              "snackbar",
+              true,
+              `${err["response"]["data"]}`,
+              "error"
+            );
           });
       } else {
         this.$root.$emit("snackbar", true, "All fields are required", "error");
