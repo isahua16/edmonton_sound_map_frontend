@@ -7,6 +7,7 @@ import UploadPage from "@/views/UploadPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
 import SubmissionsPage from "@/views/SubmissionsPage.vue";
+import VerifyUserPage from "@/views/VerifyUserPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -37,6 +38,10 @@ const routes = [
   {
     path: `/submissions`,
     component: SubmissionsPage,
+  },
+  {
+    path: `/verify/:token`,
+    component: VerifyUserPage,
   },
 ];
 
