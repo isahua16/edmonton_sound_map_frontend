@@ -9,6 +9,7 @@ import ProfilePage from "@/views/ProfilePage.vue";
 import SubmissionsPage from "@/views/SubmissionsPage.vue";
 import VerifyUserPage from "@/views/VerifyUserPage.vue";
 import ForgotPassword from "@/views/ForgotPassword.vue";
+import ResetPassword from "@/views/ResetPassword.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -47,6 +48,10 @@ const routes = [
   {
     path: `/forgot`,
     component: ForgotPassword,
+  },
+  {
+    path: `/reset/:token`,
+    component: ResetPassword,
   },
 ];
 

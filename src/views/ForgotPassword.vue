@@ -5,15 +5,12 @@
         <v-col>
           <h2 class="mt-16">Forgot Password</h2>
           <v-text-field
+            @keyup.enter="post_password_token"
             label="Email"
             v-model="email"
             type="text"
           ></v-text-field>
-          <v-btn
-            @keyup.enter="post_password_token"
-            @click="post_password_token"
-            :loading="loading"
-            color="primary"
+          <v-btn @click="post_password_token" :loading="loading" color="primary"
             >Submit</v-btn
           >
         </v-col>
@@ -29,16 +26,32 @@ export default {
     post_password_token: function () {
       this.loading = true;
       axios
-        .request({ url: "" })
-        .then((res) => {
-          console.log(res);
-          this.loading = false;
-          this.email = "";
+        .request({
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user/password`,
+          method: `POST`,
+          data: {
+            email: this.email,
+          },
         })
-        .catch((err) => {
-          console.log(err);
+        .then(() => {
           this.loading = false;
           this.email = "";
+          this.$root.$emit(
+            "snackbar",
+            true,
+            `Password reset email sent`,
+            "success"
+          );
+        })
+        .catch(() => {
+          this.loading = false;
+          this.email = "";
+          this.$root.$emit(
+            "snackbar",
+            true,
+            `Password reset email sent`,
+            "success"
+          );
         });
     },
   },

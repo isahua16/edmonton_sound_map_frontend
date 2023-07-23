@@ -3,7 +3,8 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12">
-          <h2 class="mt-16">{{ message }}</h2>
+          <h2 class="my-16">Email Verification</h2>
+          <p>{{ message }}</p>
           <v-btn color="primary" @click="go_to_login"> Log in </v-btn>
         </v-col>
       </v-row>
@@ -44,6 +45,7 @@ export default {
   },
   data() {
     return {
+      title: "Email Verification ",
       message: "Verification in progress",
       verified: false,
     };
