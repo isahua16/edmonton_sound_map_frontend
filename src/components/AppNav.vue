@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-bottom-navigation app v-if="!token" min-height="72" :value="value">
+    <v-bottom-navigation app v-if="!token" min-height="72" v-model="value">
       <router-link class="non_mobile" to="/"
         ><v-btn value="/" class="pa-10">
           <span>Home</span>
@@ -31,7 +31,7 @@
       </v-btn>
     </v-bottom-navigation>
 
-    <v-bottom-navigation app v-else height="72" :value="value">
+    <v-bottom-navigation app v-else height="72" v-model="value">
       <router-link class="non_mobile" to="/"
         ><v-btn value="/" class="pa-10">
           <span>Home</span>
@@ -191,6 +191,9 @@ export default {
       this.token = Cookies.get("token");
       this.is_admin = Cookies.get("is_admin");
     });
+    this.$root.$on("nav_value_change", (value) => {
+      this.value = value;
+    });
   },
   methods: {
     logout: function () {
@@ -202,14 +205,16 @@ export default {
             token: Cookies.get("token"),
           },
         })
-        .then(() => {})
+        .then(() => {
+          Cookies.remove("token");
+          Cookies.remove("is_admin");
+          if (this.$route.path !== `/`) {
+            this.$router.push(`/`);
+            this.router.$emit("nav_value_change", "/");
+          }
+          this.$root.$emit("token_update");
+        })
         .catch(() => {});
-      Cookies.remove("token");
-      Cookies.remove("is_admin");
-      if (this.$route.path !== `/`) {
-        this.$router.push(`/`);
-      }
-      this.$root.$emit("token_update");
     },
   },
   data() {

@@ -1,19 +1,31 @@
 <template>
   <v-container>
-    <h2 class="mt-16">Connect</h2>
-    <v-text-field
-      @keyup.enter="login_click"
-      v-model="email_input"
-      label="Email"
-      type="text"
-    ></v-text-field>
-    <v-text-field
-      @keyup.enter="login_click"
-      v-model="password_input"
-      label="Password"
-      type="password"
-    ></v-text-field>
-    <v-btn class="my-5" @click="login_click" color="primary"> Submit</v-btn>
+    <v-row>
+      <v-col cols="12">
+        <h2 class="mt-16">Connect</h2>
+        <v-text-field
+          @keyup.enter="login_click"
+          v-model="email_input"
+          label="Email"
+          type="text"
+        ></v-text-field>
+        <v-text-field
+          @keyup.enter="login_click"
+          v-model="password_input"
+          label="Password"
+          type="password"
+        ></v-text-field>
+        <v-btn
+          :loading="loading"
+          class="my-5"
+          @click="login_click"
+          color="primary"
+        >
+          Submit</v-btn
+        >
+        <a class="ml-5" @click="go_to_forgot">Forgot password?</a>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -22,7 +34,12 @@ import axios from "axios";
 import Cookies from "vue-cookies";
 export default {
   methods: {
+    go_to_forgot: function () {
+      this.$router.push("/forgot");
+      this.$root.$emit("nav_value_change", "/login");
+    },
     login_click: function () {
+      this.loading = true;
       if (this.email_input != "" && this.password_input != "") {
         axios
           .request({
@@ -34,7 +51,7 @@ export default {
             },
           })
           .then((res) => {
-            console.log(res);
+            this.loading = false;
             Cookies.set("token", res[`data`][0][`token`]);
             if (res[`data`][0][`is_admin`] == 1) {
               Cookies.set("is_admin", true);
@@ -42,9 +59,11 @@ export default {
             this.$root.$emit("token_update");
             if (this.$route.path !== `/`) {
               this.$router.push(`/`);
+              this.$root.$emit("nav_value_change", "/");
             }
           })
           .catch((err) => {
+            this.loading = false;
             this.$root.$emit(
               "snackbar",
               true,
@@ -53,6 +72,7 @@ export default {
             );
           });
       } else {
+        this.loading = false;
         this.$root.$emit("snackbar", true, "All fields are required", "error");
       }
     },
@@ -61,6 +81,7 @@ export default {
     return {
       email_input: "",
       password_input: "",
+      loading: false,
     };
   },
 };

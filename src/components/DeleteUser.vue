@@ -59,6 +59,7 @@ export default {
             }
             this.$root.$emit("token_update");
             this.$router.push(`/`);
+            this.$root.$emit("nav_value_change", "/");
           })
           .catch(() => {
             this.loading = false;

@@ -40,7 +40,7 @@
       </v-card>
     </v-dialog>
     <v-text-field :disabled="disabled" v-model="username"></v-text-field>
-    <v-text-field :disabled="disabled" v-model="email"></v-text-field>
+    <v-text-field disabled :value="email"></v-text-field>
     <v-textarea :disabled="disabled" v-model="bio"></v-textarea>
     <v-btn @click="click_edit" v-if="disabled" color="warning">Edit</v-btn>
     <v-btn
@@ -117,19 +117,17 @@ export default {
     click_edit: function () {
       this.disabled = !this.disabled;
       this.username_backup = this.username;
-      this.email_backup = this.email;
       this.bio_backup = this.bio;
     },
     click_save: function () {
       this.loading = true;
-      if (this.username != "" && this.email != "" && this.bio != "") {
+      if (this.username != "" && this.bio != "") {
         axios
           .request({
             url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user`,
             method: `PATCH`,
             data: {
               token: Cookies.get("token"),
-              email: this.email,
               username: this.username,
               bio: this.bio,
             },
@@ -151,7 +149,6 @@ export default {
     click_cancel: function () {
       this.disabled = !this.disabled;
       this.username = this.username_backup;
-      this.email = this.email_backup;
       this.bio = this.bio_backup;
     },
     get_user_image: function () {

@@ -2,8 +2,9 @@
   <v-main>
     <v-container>
       <v-row justify="center">
-        <v-col cols="auto">
-          <h2>{{ message }}</h2>
+        <v-col cols="12">
+          <h2 class="mt-16">{{ message }}</h2>
+          <v-btn color="primary" @click="go_to_login"> Log in </v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -14,6 +15,10 @@
 import axios from "axios";
 export default {
   methods: {
+    go_to_login: function () {
+      this.$router.push("/login");
+      this.$root.$emit("nav_value_change", "/login");
+    },
     send_verification_token: function () {
       axios
         .request({
@@ -23,22 +28,24 @@ export default {
             token: this.$route.params.token,
           },
         })
-        .then((res) => {
-          console.log(res);
-          this.message = "Verification successfull";
+        .then(() => {
+          this.verify = true;
+          this.message = "Verification successful. You can now log in.";
         })
-        .catch((err) => {
-          console.log(err);
-          this.message = "Verification failed";
+        .catch(() => {
+          this.message =
+            "Verification failed. Please log in to generate a new verification email.";
         });
     },
   },
   mounted() {
+    this.$root.$emit("nav_value_change", "/signup");
     this.send_verification_token();
   },
   data() {
     return {
       message: "Verification in progress",
+      verified: false,
     };
   },
 };

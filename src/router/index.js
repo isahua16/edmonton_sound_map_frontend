@@ -8,6 +8,7 @@ import AdminPage from "@/views/AdminPage.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
 import SubmissionsPage from "@/views/SubmissionsPage.vue";
 import VerifyUserPage from "@/views/VerifyUserPage.vue";
+import ForgotPassword from "@/views/ForgotPassword.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -42,6 +43,10 @@ const routes = [
   {
     path: `/verify/:token`,
     component: VerifyUserPage,
+  },
+  {
+    path: `/forgot`,
+    component: ForgotPassword,
   },
 ];
 
