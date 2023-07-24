@@ -2,8 +2,8 @@
   <v-main>
     <v-container v-if="features.length === 0">
       <v-row justify="center">
-        <v-col cols="auto">
-          <h2>No submissions</h2>
+        <v-col cols="10">
+          <h2 class="my-16">No submissions</h2>
         </v-col>
       </v-row>
     </v-container>
@@ -24,6 +24,7 @@ import UserFeatureItem from "@/components/UserFeatureItem.vue";
 export default {
   mounted() {
     if (Cookies.get("token") === null) {
+      this.$root.$emit("snackbar", true, "Please log in", "error");
       this.$root.$emit("token_update");
       this.$router.push(`/`);
     }

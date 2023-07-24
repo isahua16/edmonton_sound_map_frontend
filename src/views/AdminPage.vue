@@ -2,8 +2,8 @@
   <v-main>
     <v-container v-if="features.length === 0">
       <v-row justify="center">
-        <v-col cols="auto">
-          <h2>No submissions</h2>
+        <v-col cols="10">
+          <h2 class="my-16">No submissions</h2>
         </v-col>
       </v-row>
     </v-container>
@@ -53,7 +53,6 @@ export default {
           })
           .then((res) => {
             this.features = res[`data`];
-            console.log(res);
           })
           .catch();
       }
@@ -64,6 +63,12 @@ export default {
   },
   mounted() {
     if (Cookies.get("is_admin") === null || Cookies.get("token") === null) {
+      this.$root.$emit(
+        "snackbar",
+        true,
+        "Please log in as administrator",
+        "error"
+      );
       this.$root.$emit("token_update");
       this.$router.push(`/`);
     }

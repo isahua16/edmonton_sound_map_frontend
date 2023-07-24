@@ -10,6 +10,7 @@ import UploadForm from "@/components/UploadForm.vue";
 export default {
   mounted() {
     if (Cookies.get("token") === null) {
+      this.$root.$emit("snackbar", true, "Please log in", "error");
       this.$root.$emit("token_update");
       this.$router.push(`/`);
     }
