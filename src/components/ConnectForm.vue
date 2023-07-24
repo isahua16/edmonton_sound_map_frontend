@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h2 class="mt-16">Connect</h2>
+    <v-row justify="center">
+      <v-col cols="10">
+        <h2 class="my-16">Connect</h2>
         <v-text-field
           @keyup.enter="login_click"
           v-model="email_input"

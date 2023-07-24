@@ -2,7 +2,7 @@
   <v-main>
     <v-container>
       <v-row justify="center">
-        <v-col cols="12">
+        <v-col cols="10">
           <h2 class="my-16">Email Verification</h2>
           <p>{{ message }}</p>
           <v-btn color="primary" @click="go_to_login"> Log in </v-btn>

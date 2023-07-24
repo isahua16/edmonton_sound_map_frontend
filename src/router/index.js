@@ -10,6 +10,7 @@ import SubmissionsPage from "@/views/SubmissionsPage.vue";
 import VerifyUserPage from "@/views/VerifyUserPage.vue";
 import ForgotPassword from "@/views/ForgotPassword.vue";
 import ResetPassword from "@/views/ResetPassword.vue";
+import AboutPage from "@/views/AboutPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -52,6 +53,10 @@ const routes = [
   {
     path: `/reset/:token`,
     component: ResetPassword,
+  },
+  {
+    path: `/about`,
+    component: AboutPage,
   },
 ];
 

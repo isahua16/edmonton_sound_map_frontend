@@ -5,7 +5,7 @@
         <v-icon>mdi-delete</v-icon>
         Delete Account
       </v-btn>
-      <v-dialog v-model="dialog">
+      <v-dialog max-width="500" v-model="dialog">
         <v-card>
           <v-card-title class="mb-4 text-h5"> Delete account </v-card-title>
           <v-card-text>Enter your password to delete your account</v-card-text>

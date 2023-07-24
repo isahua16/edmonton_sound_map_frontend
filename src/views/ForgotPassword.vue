@@ -1,9 +1,9 @@
 <template>
   <v-main>
     <v-container>
-      <v-row>
-        <v-col>
-          <h2 class="mt-16">Forgot Password</h2>
+      <v-row justify="center">
+        <v-col cols="10">
+          <h2 class="my-16">Forgot Password</h2>
           <v-text-field
             @keyup.enter="post_password_token"
             label="Email"
@@ -25,34 +25,38 @@ export default {
   methods: {
     post_password_token: function () {
       this.loading = true;
-      axios
-        .request({
-          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user/password`,
-          method: `POST`,
-          data: {
-            email: this.email,
-          },
-        })
-        .then(() => {
-          this.loading = false;
-          this.email = "";
-          this.$root.$emit(
-            "snackbar",
-            true,
-            `Password reset email sent`,
-            "success"
-          );
-        })
-        .catch(() => {
-          this.loading = false;
-          this.email = "";
-          this.$root.$emit(
-            "snackbar",
-            true,
-            `Password reset email sent`,
-            "success"
-          );
-        });
+      if (this.email !== "") {
+        axios
+          .request({
+            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user/password`,
+            method: `POST`,
+            data: {
+              email: this.email,
+            },
+          })
+          .then(() => {
+            this.loading = false;
+            this.email = "";
+            this.$root.$emit(
+              "snackbar",
+              true,
+              `Password reset email sent`,
+              "success"
+            );
+          })
+          .catch(() => {
+            this.loading = false;
+            this.email = "";
+            this.$root.$emit(
+              "snackbar",
+              true,
+              `Password reset email sent`,
+              "success"
+            );
+          });
+      } else {
+        this.$root.$emit("snackbar", true, `Enter your email`, "success");
+      }
     },
   },
   data() {

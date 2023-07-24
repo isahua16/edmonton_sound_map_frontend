@@ -1,57 +1,69 @@
 <template>
   <v-container>
-    <v-row dense justify="center">
-      <v-col cols="auto">
+    <v-row justify="center">
+      <v-col cols="10">
+        <v-row justify="center">
+          <v-col cols="auto">
+            <v-btn
+              :disabled="disabled"
+              large
+              @click="dialog = true"
+              icon
+              width="auto"
+              height="auto"
+              class="pa-1"
+              :outlined="!disabled"
+            >
+              <v-avatar size="120">
+                <img class="avatar_image" :src="image_src" alt="" />
+              </v-avatar>
+            </v-btn>
+          </v-col>
+        </v-row>
+
+        <v-dialog max-width="500" v-model="dialog">
+          <v-card>
+            <v-card-title class="text-h5"> Upload Image </v-card-title>
+            <v-file-input
+              class="mx-4"
+              hint="500kB or less"
+              persistent-hint
+              v-model="image"
+              show-size
+              prepend-icon="mdi-image"
+              label="Image"
+            ></v-file-input>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="error" text @click="dialog = false"> Cancel </v-btn>
+              <v-btn
+                color="success"
+                text
+                @click="update_image"
+                :loading="loading"
+              >
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-text-field :disabled="disabled" v-model="username"></v-text-field>
+        <v-text-field disabled :value="email"></v-text-field>
+        <v-textarea :disabled="disabled" v-model="bio"></v-textarea>
+        <v-btn @click="click_edit" v-if="disabled" color="warning">Edit</v-btn>
         <v-btn
-          :disabled="disabled"
-          large
-          @click="dialog = true"
-          icon
-          width="auto"
-          height="auto"
-          class="pa-1"
-          :outlined="!disabled"
+          @click="click_save"
+          v-if="!disabled"
+          color="success"
+          :loading="loading"
+          >Save</v-btn
         >
-          <v-avatar size="120">
-            <img class="avatar_image" :src="image_src" alt="" />
-          </v-avatar>
-        </v-btn>
+        <v-btn @click="click_cancel" v-if="!disabled" color="error"
+          >Cancel</v-btn
+        >
+        <delete-user></delete-user>
       </v-col>
     </v-row>
-    <v-dialog v-model="dialog">
-      <v-card>
-        <v-card-title class="text-h5"> Upload Image </v-card-title>
-        <v-file-input
-          class="mx-4"
-          hint="500kB or less"
-          persistent-hint
-          v-model="image"
-          show-size
-          prepend-icon="mdi-image"
-          label="Image"
-        ></v-file-input>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="error" text @click="dialog = false"> Cancel </v-btn>
-          <v-btn color="success" text @click="update_image" :loading="loading">
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-text-field :disabled="disabled" v-model="username"></v-text-field>
-    <v-text-field disabled :value="email"></v-text-field>
-    <v-textarea :disabled="disabled" v-model="bio"></v-textarea>
-    <v-btn @click="click_edit" v-if="disabled" color="warning">Edit</v-btn>
-    <v-btn
-      @click="click_save"
-      v-if="!disabled"
-      color="success"
-      :loading="loading"
-      >Save</v-btn
-    >
-    <v-btn @click="click_cancel" v-if="!disabled" color="error">Cancel</v-btn>
-    <delete-user></delete-user>
   </v-container>
 </template>
 

@@ -138,7 +138,7 @@
                 @click="cancel_edit_info"
                 >Cancel</v-btn
               >
-              <v-dialog v-model="dialog">
+              <v-dialog max-width="500" v-model="dialog">
                 <v-card>
                   <v-card-title class="text-h5"> Delete feature </v-card-title>
                   <v-card-text
@@ -161,7 +161,7 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-              <v-dialog v-model="image_dialog">
+              <v-dialog max-width="500" v-model="image_dialog">
                 <v-card>
                   <v-card-title class="text-h5"> Upload Image </v-card-title>
                   <v-file-input

@@ -1,87 +1,99 @@
 <template>
   <v-container>
-    <h2 class="mt-5 mb-5">Submission</h2>
-    <secondary-map class="mb-5"></secondary-map>
-    <v-text-field
-      @keyup.enter="post_feature"
-      v-model="name"
-      label="Name*"
-    ></v-text-field>
-    <v-text-field
-      @keyup.enter="post_feature"
-      disabled
-      v-model="location"
-      label="Location*"
-    ></v-text-field>
-    <v-textarea
-      @keyup.enter="post_feature"
-      v-model="description"
-      auto-grow
-      rows="1"
-      label="Description*"
-    ></v-textarea>
-    <v-container class="descriptors">
-      <v-select v-model="season" label="Season*" :items="seasons"></v-select>
-      <v-select v-model="time" label="Time of Day*" :items="times"></v-select>
-    </v-container>
-    <v-container class="categories">
-      <v-checkbox
-        dense
-        :false-value="0"
-        :true-value="1"
-        label="Interior"
-        v-model="is_interior"
-      ></v-checkbox>
-      <v-checkbox
-        :false-value="0"
-        :true-value="1"
-        dense
-        label="Natural"
-        v-model="is_natural"
-      ></v-checkbox>
-      <v-checkbox
-        :false-value="0"
-        :true-value="1"
-        dense
-        label="Societal"
-        v-model="is_societal"
-      ></v-checkbox>
-      <v-checkbox
-        :false-value="0"
-        :true-value="1"
-        dense
-        label="Mechanical"
-        v-model="is_mechanical"
-      ></v-checkbox>
-    </v-container>
-    <v-container class="files">
-      <v-file-input
-        @keyup.enter="post_feature"
-        hint="500kB or less"
-        persistent-hint
-        v-model="image"
-        show-size
-        prepend-icon="mdi-image"
-        label="Image"
-      ></v-file-input>
-      <v-file-input
-        @keyup.enter="post_feature"
-        hint="50MB or less"
-        persistent-hint
-        v-model="audio"
-        show-size
-        prepend-icon="mdi-volume-high"
-        label="Audio*"
-      ></v-file-input>
-    </v-container>
-    <v-btn
-      :loading="loading"
-      :disabled="loading"
-      @click="post_feature"
-      class="my-5"
-      color="primary"
-      >Submit</v-btn
-    >
+    <v-row justify="center">
+      <v-col cols="10">
+        <h2 class="my-16">Submission</h2>
+        <secondary-map class="mb-5"></secondary-map>
+        <v-text-field
+          @keyup.enter="post_feature"
+          v-model="name"
+          label="Name*"
+        ></v-text-field>
+        <v-text-field
+          @keyup.enter="post_feature"
+          disabled
+          v-model="location"
+          label="Location*"
+        ></v-text-field>
+        <v-textarea
+          @keyup.enter="post_feature"
+          v-model="description"
+          auto-grow
+          rows="1"
+          label="Description*"
+        ></v-textarea>
+        <v-container class="descriptors">
+          <v-select
+            v-model="season"
+            label="Season*"
+            :items="seasons"
+          ></v-select>
+          <v-select
+            v-model="time"
+            label="Time of Day*"
+            :items="times"
+          ></v-select>
+        </v-container>
+        <v-container class="categories">
+          <v-checkbox
+            dense
+            :false-value="0"
+            :true-value="1"
+            label="Interior"
+            v-model="is_interior"
+          ></v-checkbox>
+          <v-checkbox
+            :false-value="0"
+            :true-value="1"
+            dense
+            label="Natural"
+            v-model="is_natural"
+          ></v-checkbox>
+          <v-checkbox
+            :false-value="0"
+            :true-value="1"
+            dense
+            label="Societal"
+            v-model="is_societal"
+          ></v-checkbox>
+          <v-checkbox
+            :false-value="0"
+            :true-value="1"
+            dense
+            label="Mechanical"
+            v-model="is_mechanical"
+          ></v-checkbox>
+        </v-container>
+        <v-container class="files">
+          <v-file-input
+            @keyup.enter="post_feature"
+            hint="500kB or less"
+            persistent-hint
+            v-model="image"
+            show-size
+            prepend-icon="mdi-image"
+            label="Image"
+          ></v-file-input>
+          <v-file-input
+            @keyup.enter="post_feature"
+            hint="50MB or less"
+            persistent-hint
+            v-model="audio"
+            show-size
+            prepend-icon="mdi-volume-high"
+            label="Audio*"
+          ></v-file-input>
+        </v-container>
+        <v-btn
+          :loading="loading"
+          :disabled="loading"
+          @click="post_feature"
+          class="my-10"
+          color="primary"
+          >Submit</v-btn
+        >
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

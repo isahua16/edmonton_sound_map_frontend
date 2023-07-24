@@ -104,7 +104,7 @@
                 @click="dialog = true"
                 >Delete</v-btn
               >
-              <v-dialog v-model="dialog">
+              <v-dialog max-width="500" v-model="dialog">
                 <v-card>
                   <v-card-title class="text-h5"> Delete feature </v-card-title>
                   <v-card-text

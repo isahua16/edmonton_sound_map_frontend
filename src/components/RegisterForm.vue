@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h2 class="mt-16">Register</h2>
+    <v-row justify="center">
+      <v-col cols="10">
+        <h2 class="my-16">Register</h2>
         <v-text-field
           @keyup.enter="signup_click"
           v-model="email_input"
@@ -83,10 +83,16 @@ export default {
               "Verification email sent",
               "success"
             );
+            this.email_input = "";
+            this.username_input = "";
+            this.password_input = "";
           })
           .catch(() => {
             this.loading = false;
             this.$root.$emit("snackbar", true, "Sign up failed", "error");
+            this.email_input = "";
+            this.username_input = "";
+            this.password_input = "";
           });
       } else {
         this.loading = false;
