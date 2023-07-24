@@ -124,30 +124,38 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-// let old_tags = document.querySelectorAll(`meta`);
-// for (let i = 0; i < old_tags.length; i++) {
-//   old_tags[i].remove();
-// }
-// let new_tags = to.meta;
-// document.querySelector(`title`).innerHTML = new_tags[0].title;
-// for (let i = 1; i < new_tags.length; i++) {
-//   document
-//     .querySelector(`head`)
-//     .insertAdjacentHTML(
-//       `beforeend`,
-//       `<meta name="${new_tags[i].name}" content="${new_tags[i].content}">`
-//     );
-// }
-// document.querySelector(`head`).insertAdjacentHTML(
-//   `afterbegin`,
-//   `
-//   <meta charset="utf-8">
-//   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//   <meta name="viewport" content="width=device-width,initial-scale=1.0">`
-// );
-// from;
-// next();
-// });
+router.beforeEach((to, from, next) => {
+  let old_tags = document.querySelectorAll(`meta`);
+  for (let i = 0; i < old_tags.length; i++) {
+    old_tags[i].remove();
+  }
+  let new_tags = to.meta;
+  document.querySelector(`title`).innerHTML = new_tags[0].title;
+  for (let i = 1; i < new_tags.length; i++) {
+    document
+      .querySelector(`head`)
+      .insertAdjacentHTML(
+        `beforeend`,
+        `<meta name="${new_tags[i].name}" content="${new_tags[i].content}">`
+      );
+  }
+  document.querySelector(`head`).insertAdjacentHTML(
+    `afterbegin`,
+    `
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-00BLJDY7X1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-00BLJDY7X1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">`
+  );
+  from;
+  next();
+});
 
 export default router;

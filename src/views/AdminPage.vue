@@ -63,8 +63,9 @@ export default {
     FeatureItem,
   },
   mounted() {
-    if (Cookies.get("is_admin") == null || Cookies.get("token") == null) {
-      this.$router.path(`/`);
+    if (Cookies.get("is_admin") === null || Cookies.get("token") === null) {
+      this.$root.$emit("token_update");
+      this.$router.push(`/`);
     }
     this.get_all_features();
     this.$root.$on("feature_delete", this.delete_feature);

@@ -23,8 +23,9 @@ import Cookies from "vue-cookies";
 import UserFeatureItem from "@/components/UserFeatureItem.vue";
 export default {
   mounted() {
-    if (Cookies.get("token") == null) {
-      this.$router.path(`/`);
+    if (Cookies.get("token") === null) {
+      this.$root.$emit("token_update");
+      this.$router.push(`/`);
     }
     console.log(this.features);
     this.get_user_features();

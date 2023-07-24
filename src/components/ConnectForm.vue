@@ -23,7 +23,7 @@
         >
           Submit</v-btn
         >
-        <a class="ml-5" @click="go_to_forgot">Forgot password?</a>
+        <a class="ml-5" @click="go_to_forgot">Forgot Password?</a>
       </v-col>
     </v-row>
   </v-container>
