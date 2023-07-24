@@ -44,7 +44,16 @@
         <v-col cols="10" sm="6" md="7" lg="8" xl="9">
           <h3>Isael Huard</h3>
           <p>Founder, Developer</p>
-          <v-btn color="primary">Email</v-btn>
+          <v-btn href="mailto:isaelhuard@gmail.com" color="primary"
+            >Email</v-btn
+          >
+          <v-btn
+            class="ml-2"
+            target="_blank"
+            href="https://www.linkedin.com/in/isaelhuard/"
+            color="primary"
+            >LinkedIn</v-btn
+          >
         </v-col>
       </v-row>
     </v-container>

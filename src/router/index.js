@@ -17,6 +17,64 @@ const routes = [
   {
     path: `/`,
     component: HomePage,
+    meta: [
+      {
+        title: `Home | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/signup`,
