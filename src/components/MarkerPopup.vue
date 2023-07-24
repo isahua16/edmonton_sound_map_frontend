@@ -31,9 +31,9 @@ export default {
         this.societal = `<span class="pill">societal</span>`;
       }
       if (this.feature.time === "day") {
-        this.time = `<img class="sun_icon" src="/sun.png"/>`;
+        this.time = `<img class="sun_icon" src="/sun.png" alt="Icon of a sun representing the fact that the sound was recorded during the day"/>`;
       } else {
-        this.time = `<img class="moon_icon" src="/moon.png"/>`;
+        this.time = `<img class="moon_icon" src="/moon.png" alt="Icon of a moon representing the fact that the sound was recorded at night"/>`;
       }
     },
     get_feature_image: function () {
@@ -76,7 +76,7 @@ export default {
                 ${this.natural}
                 ${this.societal}
             </div>
-            <img class="popup_image" src="${image}">
+            <img class="popup_image" src="${image}" alt="User submitted image that represents their recording">
             <i>${this.feature.location}</i>
             <p>${this.feature.description}</p>
             <audio controls controlsList="nodownload" src="${src}">`

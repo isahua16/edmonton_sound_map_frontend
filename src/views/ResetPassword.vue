@@ -1,8 +1,8 @@
 <template>
   <v-main>
     <v-container>
-      <v-row>
-        <v-col cols="12">
+      <v-row justify="center">
+        <v-col cols="10">
           <h2 class="mt-16">Reset Password</h2>
           <v-text-field
             @keyup.enter="post_new_password"

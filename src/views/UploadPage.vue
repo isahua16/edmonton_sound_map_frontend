@@ -9,7 +9,7 @@ import Cookies from "vue-cookies";
 import UploadForm from "@/components/UploadForm.vue";
 export default {
   mounted() {
-    if (Cookies.get("is_admin") === null || Cookies.get("token") === null) {
+    if (Cookies.get("token") === null) {
       this.$root.$emit("token_update");
       this.$router.push(`/`);
     }

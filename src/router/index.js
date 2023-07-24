@@ -22,57 +22,64 @@ const routes = [
         title: `Home | Edmonton Sound Map`,
       },
       {
-        name: `description`,
+        name: `robots`,
         content: ``,
+      },
+      {
+        name: `description`,
+        content: `Discover Edmonton's soundscape with our community-driven sound map. Listen to the evolving sounds of Edmonton and be part of preserving its auditory heritage.`,
       },
       {
         name: `author`,
-        content: ``,
+        content: `Isael Huard`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `Edmonton Sound Map, sonic heritage, soundscape, community, auditory archive, urban experiences, audio recordings, Edmonton sounds, city identity, preserving heritage, acoustic environment, urban symphony, sound map`,
       },
       {
         property: `og:url`,
-        content: ``,
+        content: `https://edmontonsoundmap.com`,
       },
       {
         property: `og:type`,
-        content: ``,
+        content: `website`,
       },
       {
         property: `og:title`,
-        content: ``,
+        content: `Edmonton Sound Map: Preserving the City's Sonic Heritage`,
       },
       {
         property: `og:description`,
-        content: ``,
+        content: `Discover Edmonton's soundscape with our community-driven sound map. Listen to the evolving sounds of Edmonton and be part of preserving its auditory heritage.`,
       },
       {
         property: `og:image`,
-        content: ``,
+        content: `https://edmontonsoundmap.com/edmonton.jpg`,
       },
       {
         property: `og:site_name`,
-        content: ``,
+        content: `Edmonton Sound Map`,
       },
       {
         property: `twitter:card`,
-        content: ``,
+        content: `summary_large_image`,
       },
       {
         property: `twitter:site`,
-        content: ``,
+        content: `https://twitter.com/YEGsoundmap`,
       },
-      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:title`,
+        content: `Edmonton Sound Map: Preserving the City's Sonic Heritage`,
+      },
       {
         property: `twitter:description`,
-        content: ``,
+        content: `Discover Edmonton's soundscape with our community-driven sound map. Listen to the evolving sounds of Edmonton and be part of preserving its auditory heritage.`,
       },
       {
         property: `twitter:image`,
-        content: ``,
+        content: `https://edmontonsoundmap.com/edmonton.jpg`,
       },
     ],
   },
@@ -84,57 +91,64 @@ const routes = [
         title: `Sign Up | Edmonton Sound Map`,
       },
       {
-        name: `description`,
+        name: `robots`,
         content: ``,
+      },
+      {
+        name: `description`,
+        content: `Join the Edmonton Sound Map community and be a part of preserving the city's sonic heritage. Sign up now to contribute your audio recordings, explore the diverse soundscape of Edmonton, and connect with fellow sound enthusiasts.`,
       },
       {
         name: `author`,
-        content: ``,
+        content: `Isael Huard`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `sign up, join community, Edmonton Sound Map, sonic heritage, soundscape, audio recordings, sound enthusiasts, urban experiences, preserve heritage, field recording`,
       },
       {
         property: `og:url`,
-        content: ``,
+        content: `https://edmontonsoundmap.com/signup`,
       },
       {
         property: `og:type`,
-        content: ``,
+        content: `website`,
       },
       {
         property: `og:title`,
-        content: ``,
+        content: `Sign Up for Edmonton Sound Map | Join Our Community`,
       },
       {
         property: `og:description`,
-        content: ``,
+        content: `Join the Edmonton Sound Map community and be a part of preserving the city's sonic heritage. Sign up now to contribute your audio recordings, explore the diverse soundscape of Edmonton, and connect with fellow sound enthusiasts.`,
       },
       {
         property: `og:image`,
-        content: ``,
+        content: `https://edmontonsoundmap.com/edmonton.jpg`,
       },
       {
         property: `og:site_name`,
-        content: ``,
+        content: `Edmonton Sound Map`,
       },
       {
         property: `twitter:card`,
-        content: ``,
+        content: `summary_large_image`,
       },
       {
         property: `twitter:site`,
-        content: ``,
+        content: `https://twitter.com/YEGsoundmap`,
       },
-      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:title`,
+        content: `Sign Up for Edmonton Sound Map | Join Our Community`,
+      },
       {
         property: `twitter:description`,
-        content: ``,
+        content: `Join the Edmonton Sound Map community and be a part of preserving the city's sonic heritage. Sign up now to contribute your audio recordings, explore the diverse soundscape of Edmonton, and connect with fellow sound enthusiasts.`,
       },
       {
         property: `twitter:image`,
-        content: ``,
+        content: `https://edmontonsoundmap.com/edmonton.jpg`,
       },
     ],
   },
@@ -144,6 +158,79 @@ const routes = [
     meta: [
       {
         title: `Log In | Edmonton Sound Map`,
+      },
+      {
+        name: `robots`,
+        content: ``,
+      },
+      {
+        name: `description`,
+        content: `Log in to your Edmonton Sound Map account and access your personalized dashboard. Join the community, contribute audio recordings, and explore the sonic heritage of Edmonton.`,
+      },
+      {
+        name: `author`,
+        content: `Isael Huard`,
+      },
+      {
+        name: `keywords`,
+        content: `login, access account, Edmonton Sound Map, sonic heritage, sound community, audio recordings, urban soundscape`,
+      },
+      {
+        property: `og:url`,
+        content: `https://edmontonsoundmap.com/login`,
+      },
+      {
+        property: `og:type`,
+        content: `website`,
+      },
+      {
+        property: `og:title`,
+        content: `Login to Edmonton Sound Map | Access Your Account`,
+      },
+      {
+        property: `og:description`,
+        content: `Log in to your Edmonton Sound Map account and access your personalized dashboard. Join the community, contribute audio recordings, and explore the sonic heritage of Edmonton.`,
+      },
+      {
+        property: `og:image`,
+        content: `https://edmontonsoundmap.com/edmonton.jpg`,
+      },
+      {
+        property: `og:site_name`,
+        content: `Edmonton Sound Map`,
+      },
+      {
+        property: `twitter:card`,
+        content: `summary_large_image`,
+      },
+      {
+        property: `twitter:site`,
+        content: `https://twitter.com/YEGsoundmap`,
+      },
+      {
+        property: `twitter:title`,
+        content: `Login to Edmonton Sound Map | Access Your Account`,
+      },
+      {
+        property: `twitter:description`,
+        content: `Log in to your Edmonton Sound Map account and access your personalized dashboard. Join the community, contribute audio recordings, and explore the sonic heritage of Edmonton.`,
+      },
+      {
+        property: `twitter:image`,
+        content: `https://edmontonsoundmap.com/edmonton.jpg`,
+      },
+    ],
+  },
+  {
+    path: `/about`,
+    component: AboutPage,
+    meta: [
+      {
+        title: `About | Edmonton Sound Map`,
+      },
+      {
+        name: `robots`,
+        content: ``,
       },
       {
         name: `description`,
@@ -577,69 +664,7 @@ const routes = [
     component: ResetPassword,
     meta: [
       {
-        title: `Reset Password| Edmonton Sound Map`,
-      },
-      {
-        name: `description`,
-        content: ``,
-      },
-      {
-        name: `author`,
-        content: ``,
-      },
-      {
-        name: `keywords`,
-        content: ``,
-      },
-      {
-        property: `og:url`,
-        content: ``,
-      },
-      {
-        property: `og:type`,
-        content: ``,
-      },
-      {
-        property: `og:title`,
-        content: ``,
-      },
-      {
-        property: `og:description`,
-        content: ``,
-      },
-      {
-        property: `og:image`,
-        content: ``,
-      },
-      {
-        property: `og:site_name`,
-        content: ``,
-      },
-      {
-        property: `twitter:card`,
-        content: ``,
-      },
-      {
-        property: `twitter:site`,
-        content: ``,
-      },
-      { property: `twitter:title`, content: `` },
-      {
-        property: `twitter:description`,
-        content: ``,
-      },
-      {
-        property: `twitter:image`,
-        content: ``,
-      },
-    ],
-  },
-  {
-    path: `/about`,
-    component: AboutPage,
-    meta: [
-      {
-        title: `About | Edmonton Sound Map`,
+        title: `Reset Password | Edmonton Sound Map`,
       },
       {
         name: `description`,

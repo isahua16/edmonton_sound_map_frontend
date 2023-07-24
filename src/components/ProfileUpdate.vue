@@ -15,7 +15,11 @@
               :outlined="!disabled"
             >
               <v-avatar size="120">
-                <img class="avatar_image" :src="image_src" alt="" />
+                <img
+                  class="avatar_image"
+                  :src="image_src"
+                  alt="User submitted image for their profile"
+                />
               </v-avatar>
             </v-btn>
           </v-col>

@@ -27,7 +27,11 @@
                 :outlined="!disabled"
               >
                 <v-avatar size="120">
-                  <img class="avatar_image" :src="image" />
+                  <img
+                    class="avatar_image"
+                    :src="image"
+                    alt="User uploaded image representing the recording"
+                  />
                 </v-avatar>
               </v-btn>
             </v-row>

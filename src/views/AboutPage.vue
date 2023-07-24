@@ -37,22 +37,67 @@
           </p>
         </v-col>
       </v-row>
+      <v-row justify="center">
+        <v-col cols="auto">
+          <v-btn
+            class="mt-4 mb-16"
+            target="_blank"
+            href="https://discord.gg/eKTXf5JUzR"
+            color="primary"
+            large
+          >
+            <v-icon class="mr-3">$discord</v-icon>
+            Join our Community
+          </v-btn>
+        </v-col>
+      </v-row>
       <v-row align="center" justify="center">
         <v-col cols="10" sm="4" md="3" lg="2" xl="1">
-          <v-avatar size="150"> <img src="/isael.jpg" alt="" /> </v-avatar>
+          <v-avatar size="150">
+            <img
+              src="/isael.jpg"
+              alt="Image of co-founder and developer Isael Huard"
+            />
+          </v-avatar>
         </v-col>
         <v-col cols="10" sm="6" md="7" lg="8" xl="9">
           <h3>Isael Huard</h3>
-          <p>Founder, Developer</p>
-          <v-btn href="mailto:isaelhuard@gmail.com" color="primary"
-            >Email</v-btn
+          <p>Co-Founder, Developer</p>
+          <v-btn href="mailto:isaelhuard@gmail.com" color="primary">
+            <v-icon class="mr-1">mdi-email</v-icon>
+            Email</v-btn
           >
           <v-btn
             class="ml-2"
             target="_blank"
             href="https://www.linkedin.com/in/isaelhuard/"
             color="primary"
-            >LinkedIn</v-btn
+            ><v-icon class="mr-1">mdi-linkedin</v-icon> LinkedIn</v-btn
+          >
+        </v-col>
+      </v-row>
+      <v-row class="mt-8" align="center" justify="center">
+        <v-col cols="10" sm="4" md="3" lg="2" xl="1">
+          <v-avatar size="150">
+            <img
+              src="/icon.png"
+              alt="Image of Edmonton Sound Map icon that represents the North Saskatchewan River"
+            />
+          </v-avatar>
+        </v-col>
+        <v-col cols="10" sm="6" md="7" lg="8" xl="9">
+          <h3>Chris Szott</h3>
+          <p>Co-Founder</p>
+          <v-btn href="mailto:chrisszott@gmail.com" color="primary">
+            <v-icon class="mr-1">mdi-email</v-icon>Email</v-btn
+          >
+          <v-btn
+            class="ml-2"
+            target="_blank"
+            href="https://www.linkedin.com/in/chris-szott/"
+            color="primary"
+          >
+            <v-icon class="mr-1">mdi-linkedin</v-icon>LinkedIn</v-btn
           >
         </v-col>
       </v-row>
