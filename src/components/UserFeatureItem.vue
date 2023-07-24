@@ -98,12 +98,7 @@
               ></audio>
             </v-row>
             <v-row class="my-8">
-              <v-btn
-                v-if="is_approved == false && disabled == true"
-                color="error"
-                @click="dialog = true"
-                >Delete</v-btn
-              >
+              <v-btn color="error" @click="dialog = true">Delete</v-btn>
               <v-dialog max-width="500" v-model="dialog">
                 <v-card>
                   <v-card-title class="text-h5"> Delete feature </v-card-title>
