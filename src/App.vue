@@ -25,12 +25,13 @@ export default {
       color: "error",
     };
   },
-  mounted() {
+  beforeCreate() {
     this.$root.$on("snackbar", (state, message, color) => {
       this.snackbar = state;
       this.message = message;
       this.color = color;
     });
   },
+  mounted() {},
 };
 </script>

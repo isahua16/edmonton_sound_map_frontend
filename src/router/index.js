@@ -23,7 +23,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `all`,
       },
       {
         name: `description`,
@@ -92,7 +92,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `all`,
       },
       {
         name: `description`,
@@ -161,7 +161,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `all`,
       },
       {
         name: `description`,
@@ -230,7 +230,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `all`,
       },
       {
         name: `description`,
@@ -299,7 +299,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `none`,
       },
       {
         name: `description`,
@@ -368,7 +368,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `none`,
       },
       {
         name: `description`,
@@ -437,7 +437,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `none`,
       },
       {
         name: `description`,
@@ -503,6 +503,10 @@ const routes = [
     meta: [
       {
         title: `Submissions | Edmonton Sound Map`,
+      },
+      {
+        name: `robots`,
+        content: `none`,
       },
       {
         name: `description`,
@@ -571,7 +575,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `none`,
       },
       {
         name: `description`,
@@ -640,7 +644,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `none`,
       },
       {
         name: `description`,
@@ -709,7 +713,7 @@ const routes = [
       },
       {
         name: `robots`,
-        content: ``,
+        content: `none`,
       },
       {
         name: `description`,

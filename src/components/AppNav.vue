@@ -186,7 +186,7 @@
 import Cookies from "vue-cookies";
 import axios from "axios";
 export default {
-  mounted() {
+  beforeCreate() {
     this.$root.$on("token_update", () => {
       this.token = Cookies.get("token");
       this.is_admin = Cookies.get("is_admin");
@@ -210,7 +210,7 @@ export default {
           Cookies.remove("is_admin");
           if (this.$route.path !== `/`) {
             this.$router.push(`/`);
-            this.router.$emit("nav_value_change", "/");
+            this.$root.$emit("nav_value_change", "/");
           }
           this.$root.$emit("token_update");
         })
@@ -219,7 +219,7 @@ export default {
           Cookies.remove("is_admin");
           if (this.$route.path !== `/`) {
             this.$router.push(`/`);
-            this.router.$emit("nav_value_change", "/");
+            this.$root.$emit("nav_value_change", "/");
           }
           this.$root.$emit("token_update");
         });

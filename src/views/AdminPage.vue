@@ -30,7 +30,7 @@ import FeatureItem from "@/components/FeatureItem.vue";
 export default {
   data() {
     return {
-      features: null,
+      features: [],
     };
   },
   methods: {
@@ -63,6 +63,7 @@ export default {
   },
   mounted() {
     if (Cookies.get("is_admin") === null || Cookies.get("token") === null) {
+      this.$router.push(`/`);
       this.$root.$emit(
         "snackbar",
         true,
@@ -70,13 +71,13 @@ export default {
         "error"
       );
       this.$root.$emit("token_update");
-      this.$router.push(`/`);
+    } else {
+      this.get_all_features();
+      this.$root.$on("feature_delete", this.delete_feature);
+      this.$root.$on("status_change", (index, status) => {
+        this.features[index]["is_approved"] = status;
+      });
     }
-    this.get_all_features();
-    this.$root.$on("feature_delete", this.delete_feature);
-    this.$root.$on("status_change", (index, status) => {
-      this.features[index]["is_approved"] = status;
-    });
   },
 };
 </script>
