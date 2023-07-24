@@ -79,42 +79,622 @@ const routes = [
   {
     path: `/signup`,
     component: RegisterPage,
+    meta: [
+      {
+        title: `Sign Up | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/login`,
     component: ConnectPage,
+    meta: [
+      {
+        title: `Log In | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/upload`,
     component: UploadPage,
+    meta: [
+      {
+        title: `Upload | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/admin`,
     component: AdminPage,
+    meta: [
+      {
+        title: `Admin | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/profile`,
     component: ProfilePage,
+    meta: [
+      {
+        title: `Profile | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/submissions`,
     component: SubmissionsPage,
+    meta: [
+      {
+        title: `Submissions | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/verify/:token`,
     component: VerifyUserPage,
+    meta: [
+      {
+        title: `Verify Email | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/forgot`,
     component: ForgotPassword,
+    meta: [
+      {
+        title: `Forgot Password | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/reset/:token`,
     component: ResetPassword,
+    meta: [
+      {
+        title: `Reset Password| Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
   {
     path: `/about`,
     component: AboutPage,
+    meta: [
+      {
+        title: `About | Edmonton Sound Map`,
+      },
+      {
+        name: `description`,
+        content: ``,
+      },
+      {
+        name: `author`,
+        content: ``,
+      },
+      {
+        name: `keywords`,
+        content: ``,
+      },
+      {
+        property: `og:url`,
+        content: ``,
+      },
+      {
+        property: `og:type`,
+        content: ``,
+      },
+      {
+        property: `og:title`,
+        content: ``,
+      },
+      {
+        property: `og:description`,
+        content: ``,
+      },
+      {
+        property: `og:image`,
+        content: ``,
+      },
+      {
+        property: `og:site_name`,
+        content: ``,
+      },
+      {
+        property: `twitter:card`,
+        content: ``,
+      },
+      {
+        property: `twitter:site`,
+        content: ``,
+      },
+      { property: `twitter:title`, content: `` },
+      {
+        property: `twitter:description`,
+        content: ``,
+      },
+      {
+        property: `twitter:image`,
+        content: ``,
+      },
+    ],
   },
 ];
 

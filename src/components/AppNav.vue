@@ -10,7 +10,7 @@
       <router-link class="non_mobile" to="/about">
         <v-btn value="/about" class="pa-10">
           <span>About</span>
-          <v-icon>mdi-information</v-icon>
+          <v-icon>mdi-map-marker-question</v-icon>
         </v-btn>
       </router-link>
       <router-link class="non_mobile" to="/signup"
@@ -89,7 +89,7 @@
         <router-link to="/about">
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-information</v-icon>
+              <v-icon>mdi-map-marker-question</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>About</v-list-item-title>
