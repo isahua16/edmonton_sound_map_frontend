@@ -11,6 +11,7 @@ import VerifyUserPage from "@/views/VerifyUserPage.vue";
 import ForgotPassword from "@/views/ForgotPassword.vue";
 import ResetPassword from "@/views/ResetPassword.vue";
 import AboutPage from "@/views/AboutPage.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -776,8 +777,6 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
   routes,
 });
 
