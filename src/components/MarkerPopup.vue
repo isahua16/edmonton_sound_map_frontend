@@ -51,9 +51,7 @@ export default {
             this.get_feature_audio(src);
             this.is_called = true;
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch(() => {});
       }
     },
     get_feature_audio: function (image) {

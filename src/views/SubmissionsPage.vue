@@ -28,7 +28,6 @@ export default {
       this.$root.$emit("token_update");
       this.$router.push(`/`);
     }
-    console.log(this.features);
     this.get_user_features();
     this.$root.$on("feature_delete", this.delete_feature);
   },

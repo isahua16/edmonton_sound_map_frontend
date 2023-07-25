@@ -49,8 +49,7 @@ export default {
             this.$router.push("/login");
             this.$root.$emit("nav_value_change", "/login");
           })
-          .catch((err) => {
-            console.log(err);
+          .catch(() => {
             this.loading = false;
             this.password = "";
             this.$root.$emit("snackbar", true, `Expired token`, "error");
