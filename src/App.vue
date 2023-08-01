@@ -35,3 +35,9 @@ export default {
   mounted() {},
 };
 </script>
+
+<style>
+.v-application--wrap {
+  min-height: 100dvh !important;
+}
+</style>

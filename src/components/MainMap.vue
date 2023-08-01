@@ -49,7 +49,7 @@ export default {
 <style scoped>
 #map {
   width: 100%;
-  min-height: calc(100vh - 144px);
+  min-height: 100%;
   z-index: 0;
 }
 .floating_filter {
