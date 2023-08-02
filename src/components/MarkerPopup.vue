@@ -38,6 +38,9 @@ export default {
     },
     get_feature_image: function () {
       if (this.is_called == false) {
+        this.popup.setContent(`<div class="popup_loader">       
+        <img class="loader" src="/loader.gif">
+        </div>`);
         axios
           .request({
             url: `${process.env.VUE_APP_BASE_DOMAIN}/api/feature/image`,
@@ -109,6 +112,15 @@ export default {
 </script>
 
 <style>
+.popup_loader {
+  display: grid;
+  place-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.loader {
+  width: 30px;
+}
 .popup_header {
   display: grid;
   width: 100%;
