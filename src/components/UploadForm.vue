@@ -76,7 +76,7 @@
           ></v-file-input>
           <v-file-input
             @keyup.enter="post_feature"
-            hint="5MB or less"
+            hint="1MB or less"
             persistent-hint
             v-model="audio"
             show-size
