@@ -146,6 +146,7 @@ export default {
           })
           .then(() => {
             this.loading = false;
+            this.$root.$emit("remove_marker");
             this.$root.$emit(
               "snackbar",
               true,

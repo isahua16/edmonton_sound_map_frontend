@@ -65,6 +65,9 @@ export default {
   mounted() {
     this.setup_map();
     this.map.on("click", this.map_click);
+    this.$root.$on("remove_marker", () => {
+      this.marker.remove();
+    });
   },
 };
 </script>
