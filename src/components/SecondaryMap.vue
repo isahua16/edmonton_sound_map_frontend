@@ -27,14 +27,18 @@ export default {
         "Loading..."
       );
       this.marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
-      this.geocoder.options.geocoder.reverse(e.latlng, 18, (results) => {
-        this.$root.$emit(
-          "click_latlng",
-          e.latlng.lat,
-          e.latlng.lng,
-          results[0][`name`]
-        );
-      });
+      this.geocoder.options.geocoder.reverse(
+        e.latlng,
+        this.map.options.crs.scale(this.map.getZoom()),
+        (results) => {
+          this.$root.$emit(
+            "click_latlng",
+            e.latlng.lat,
+            e.latlng.lng,
+            results[0][`name`]
+          );
+        }
+      );
     },
     setup_map: function () {
       let corner1 = L.latLng(53.88167850008248, -112.59475708007814);
@@ -50,7 +54,7 @@ export default {
         "https://tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token=8nDStn933xTbhSC1BHugLOD5N40As4Lkm1HFlYv22SBm6jAlIZReTwdLZiLHjnlu",
         {
           minZoom: 12,
-          maxZoom: 22,
+          maxZoom: 18,
           accessToken:
             "8nDStn933xTbhSC1BHugLOD5N40As4Lkm1HFlYv22SBm6jAlIZReTwdLZiLHjnlu",
         }
